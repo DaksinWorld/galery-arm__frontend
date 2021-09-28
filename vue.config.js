@@ -1,11 +1,11 @@
 const path = require('path')
 
 module.exports = {
-    outputDir: path.resolve(__dirname, '../server/public'),
+    outputDir: path.resolve(__dirname, './dist'),
     devServer: {
         proxy : {
             '/': {
-                target: 'http://localhost:1337'
+                target: 'https://protected-plains-17913.herokuapp.com'
             }
         }
     }
