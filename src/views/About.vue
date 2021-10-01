@@ -1,15 +1,31 @@
 <template>
-  <div class="">
-    asdsad
+  <div v-if="source">
+    <Markdown :source="source.data.test"/>
   </div>
 </template>
 
 <script>
+import Markdown from 'vue3-markdown-it';
+import axios from 'axios'
+
 export default {
-  name: "About"
+  data() {
+
+    return{
+      source: ''
+    }
+  },
+  async mounted() {
+    this.source = await axios.get('http://localhost:1337/about')
+  },
+  components: {
+    Markdown
+  }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+img {
+  width: 200px;
+}
 </style>

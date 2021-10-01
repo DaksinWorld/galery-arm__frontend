@@ -1,6 +1,6 @@
 <template>
   <div v-if="data" class="gallery-style-class container">
-    <img :src="`https://protected-plains-17913.herokuapp.com${data.image.url}`" alt="image">
+    <img :src="`http://localhost:1337${data.image.url}`" alt="image">
     <div class="information">
       <h2 class="bold">{{data.name}}</h2>
       <h2>{{data.createdAt}}</h2>
@@ -52,7 +52,6 @@ export default {
       max-width: 1290px;
       max-height: 800px;
       object-fit: cover;
-      border: 1px solid black;
     }
     .information {
       text-align: center;

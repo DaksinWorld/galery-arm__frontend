@@ -42,7 +42,6 @@ export default {
       height: 400px;
       object-fit: cover;
       background: #566666;
-      border: 1px solid black;
     }
   }
 }

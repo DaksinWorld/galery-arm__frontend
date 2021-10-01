@@ -4,5 +4,8 @@ import router from './router'
 import store from './store'
 import './main.css'
 import './font/font.css'
+// Libraries
+import Markdown from 'vue3-markdown-it'
 
-createApp(App).use(store).use(router).mount('#app')
+
+createApp(App).use(Markdown).use(store).use(router).mount('#app')
