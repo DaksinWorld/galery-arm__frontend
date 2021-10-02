@@ -1,6 +1,6 @@
 <template>
   <div v-if="source">
-    <Markdown :source="source.data.test"/>
+    <Markdown class="markdown" :source="source.data.test"/>
   </div>
 </template>
 
@@ -23,9 +23,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-img {
-  width: 200px;
-}
-</style>

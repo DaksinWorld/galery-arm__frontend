@@ -1,11 +1,11 @@
 <template>
   <div class="container gallery" v-if="data">
-    <div class="elements">
-      <div class="element" v-for="(gallery) in data" :key="gallery.id">
+    <div class="flexbin flexbin-margin">
+      <a v-for="(gallery) in data" :key="gallery.id">
         <router-link v-slot="{navigate}" custom :to="{name: 'GalleryPage', params: {id: gallery.id}}">
-          <img :src="`https://protected-plains-17913.herokuapp.com${gallery.image.url}`" alt="image" @click="navigate">
+          <img :src="`http://localhost:1337${gallery.image.url}`" alt="image" @click="navigate">
         </router-link>
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ import {onMounted, ref} from 'vue'
 import {useStore} from 'vuex'
 
 export default {
-  setup(){
+  setup() {
     const store = useStore()
     const data = ref()
 
@@ -31,26 +31,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.gallery {
-  display: flex;
-  flex-direction: row;
-  .elements {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-    .element, img {
-      height: 400px;
-      object-fit: cover;
-      background: #566666;
-    }
-  }
-}
-
-@media screen and (max-width: 860px) {
-  .element, img {
-
-  }
-}
-
+@import "~flexbin/flexbin.css";
 
 </style>

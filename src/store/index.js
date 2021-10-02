@@ -5,7 +5,7 @@ export default createStore({
   namespaced: true,
   state() {
     return {
-      requests: []
+      requests: [],
     }
   },
   mutations: {
@@ -41,7 +41,9 @@ export default createStore({
         console.log(e)
       }
     },
-
+    storeData({commit},payload) {
+      commit('setRequests', payload)
+    }
   },
   getters: {
     token(state) {

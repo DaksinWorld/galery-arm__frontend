@@ -6,7 +6,7 @@
           <router-link to="/info/about">about</router-link>
         </h2>
         <h2>
-          <router-link to="/">Gallery</router-link>
+          <router-link to="/i/allPhoto">Gallery</router-link>
         </h2>
         <h2>
           <router-link to="/info/prints">PRINTS</router-link>
@@ -32,7 +32,7 @@ name: "Nav"
 
 <style lang="scss" scoped>
 nav {
-  padding-top: 50px;
+  padding-top: 5px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;

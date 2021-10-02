@@ -25,7 +25,7 @@ export default {
 </script>
 <style lang="scss">
 .layout {
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
 }

@@ -1,11 +1,13 @@
 <template>
-    <div class="container gallery" v-if="requests">
-      <div class="elements">
-        <div class="element" v-for="(gallery) in requests" :key="gallery.id">
-          <img :src="`https://protected-plains-17913.herokuapp.com${gallery.image.url}`" alt="image">
-        </div>
-      </div>
+  <div class="container gallery" v-if="requests">
+    <div class="flexbin flexbin-margin">
+      <a v-for="(gallery) in requests" :key="gallery.id">
+        <router-link v-slot="{navigate}" custom :to="{name: 'GalleryPage', params: {id: gallery.id}}">
+          <img :src="`http://localhost:1337${gallery.image.url}`" alt="image" @click="navigate" :requests="requests">
+        </router-link>
+      </a>
     </div>
+  </div>
 </template>
 
 <script>
@@ -24,8 +26,12 @@ export default {
 
     const requests = computed(() => store.getters['requests']
         .filter(data => {
-          let dataTag = data.tags
-          return dataTag.toLowerCase().includes(route.params.id.toLowerCase())
+          if(route.params.id) {
+            let dataTag = data.tags
+            let result = dataTag.toLowerCase().includes(route.params.id.toLowerCase())
+            return result
+          }
+          return data
         })
     )
 
@@ -36,6 +42,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "~flexbin/flexbin.css";
+
 .gallery {
   display: flex;
   flex-direction: row;

@@ -1,34 +1,41 @@
 <template>
   <div v-if="data" class="gallery-style-class container">
-    <img :src="`http://localhost:1337${data.image.url}`" alt="image">
+    <div class="images">
+      <img class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
+      <img class="mainPhoto" :src="`http://localhost:1337${data.image.url}`" alt="image">
+      <img class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
+    </div>
     <div class="information">
-      <h2 class="bold">{{data.name}}</h2>
-      <h2>{{data.createdAt}}</h2>
-      <h2 v-if="data.isAvailable">PRINT AVAILABLE</h2>
-      <h2 v-else>PRINT IS NOT AVAILABLE</h2>
-      <h2>{{data.edition}}</h2>
-      <h2>SIZE {{data.size}}</h2>
+      <h3 class="bold">{{data.name}}</h3>
+      <h3>{{data.createdAt}}</h3>
+      <h3 v-if="data.isAvailable">PRINT AVAILABLE</h3>
+      <h3 v-else>PRINT IS NOT AVAILABLE</h3>
+      <h3 v-if="data.OpenOrLimited">Limited Edition of {{data.currentCirculation}} AP</h3>
+      <h3 v-else>Open Edition</h3>
+      <h3>SIZE {{data.size}}</h3>
       <button v-if="data.isAvailable" class="buy-print">
         Buy Print
       </button>
-      <h2 class="mt-150px">
+      <h3 class="mt-100px" v-if="data.isAvailable">
         this work is part of the "{{data.tags}}"
-      </h2>
-      <h2>
+      </h3>
+      <h3>
         {{data.description}}
-      </h2>
+      </h3>
     </div>
   </div>
+  {{requests}}
 </template>
 
 <script>
 import {ref, onMounted} from 'vue'
-import {useRoute} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 
 export default {
   setup(){
     const route = useRoute()
+    const router = useRouter()
     const store = useStore()
     let data = ref()
 
@@ -37,8 +44,26 @@ export default {
       data.value = store.getters['requests']
     })
 
+    const navigateMinusOne = () => {
+      let route = data.value.id - 1
+      router.push(`/gallery-page/${route}`)
+      setTimeout(() => {
+        location.reload()
+      }, 600)
+    }
+
+    const navigatePlusOne = () => {
+      let route = data.value.id + 1
+      router.push(`/gallery-page/${route}`)
+      setTimeout(() => {
+        location.reload()
+      }, 600)
+    }
+
     return {
-      data
+      data,
+      navigateMinusOne,
+      navigatePlusOne
     }
   }
 }
@@ -47,11 +72,21 @@ export default {
 <style lang="scss" scoped>
   .gallery-style-class {
     display: grid;
-    grid-template-columns: auto auto;
-    img {
-      max-width: 1290px;
-      max-height: 800px;
-      object-fit: cover;
+    justify-items: center;
+    grid-template-columns: auto;
+    .images {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      align-items: center;
+      .mainPhoto {
+        max-width: 1300px;
+        max-height: 900px;
+        object-fit: cover;
+        margin: 0 !important;
+      }
+      .m {
+        margin: 5px;
+      }
     }
     .information {
       text-align: center;
@@ -77,9 +112,16 @@ export default {
         font-size: 20px;
       }
 
-      .mt-150px {
-        margin-top: 150px;
+      .mt-100px {
+        margin-top: 100px;
       }
+    }
+  }
+
+  @media screen and (max-width: 1760px) {
+    .gallery-style-class {
+      grid-template-columns: auto;
+      justify-items: center;
     }
   }
 </style>

@@ -26,7 +26,7 @@ export default {
   a {
     font-size: 15px;
     color: #666;
-    margin-bottom: 40px;
+    margin-bottom: 18px;
   }
 }
 </style>

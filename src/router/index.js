@@ -3,11 +3,18 @@ import Home from '../views/Home.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/i/allPhoto',
         name: 'Gallery',
         component: () => import('../views/GalleryAllTags'),
         meta: {
             layout: 'main'
+        }
+    },
+    {
+        path: '/',
+        component: () => import('../views/PushToAllPhoto'),
+        meta: {
+            layout: "void"
         }
     },
     {

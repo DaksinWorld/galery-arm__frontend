@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const requestAxios = axios.create({
-    baseURL: 'https://protected-plains-17913.herokuapp.com'
+    baseURL: 'http://localhost:1337'
 })
 
 export default requestAxios
