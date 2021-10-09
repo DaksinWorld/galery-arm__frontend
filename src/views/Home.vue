@@ -1,9 +1,9 @@
 <template>
-  <div class="container gallery" v-if="requests">
+  <div class="container gallery" v-if="data">
     <div class="flexbin flexbin-margin">
-      <a v-for="(gallery) in requests" :key="gallery.id">
-        <router-link v-slot="{navigate}" custom :to="{name: 'GalleryPage', params: {id: gallery.id}}">
-          <img :src="`http://localhost:1337${gallery.image.url}`" alt="image" @click="navigate" :requests="requests">
+      <a v-for="(gallery) in data" :key="gallery.id">
+        <router-link v-slot="{navigate}" custom :to="{name: 'GalleryPage', params: {id: gallery.tags + '_' + gallery.second_id}}">
+          <img :src="`https://strapi-postgres22.herokuapp.com${gallery.image.url}`" alt="image" @click="navigate" :requests="requests">
         </router-link>
       </a>
     </div>
@@ -11,20 +11,15 @@
 </template>
 
 <script>
-import {onMounted, computed} from 'vue'
-import {useRoute} from 'vue-router'
-import {useStore} from 'vuex'
+import {computed} from "vue";
+import {useRoute} from "vue-router";
 
 export default {
-  setup(){
-    const store = useStore()
+  props: ['requests'],
+  setup(props) {
     const route = useRoute()
 
-    onMounted(async () => {
-      await store.dispatch('getGallery')
-    })
-
-    const requests = computed(() => store.getters['requests']
+    const data = computed(() => props.requests
         .filter(data => {
           if(route.params.id) {
             let dataTag = data.tags
@@ -35,10 +30,10 @@ export default {
         })
     )
 
-    return {
-      requests
+    return{
+      data
     }
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>

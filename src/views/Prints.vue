@@ -1,10 +1,35 @@
 <template>
-  <div class=""></div>
+  <div class="container gallery" v-if="data">
+    <div class="flexbin flexbin-margin">
+      <a v-for="(gallery) in data" :key="gallery.id">
+        <router-link v-slot="{navigate}" custom :to="{name: 'GalleryPage', params: {id: gallery.tags + '_' + gallery.second_id}}">
+          <img :src="`https://strapi-postgres22.herokuapp.com${gallery.image.url}`" alt="image" @click="navigate" :requests="requests">
+        </router-link>
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
+
+import {computed} from "vue";
+
 export default {
-  name: "About"
+  props: ['requests'],
+  setup(props) {
+    const data = computed(() => props.requests
+      .filter(data => {
+        if(data) {
+          return data.Prints === true
+        }
+        return data
+      })
+    )
+
+    return {
+     data
+    }
+  }
 }
 </script>
 

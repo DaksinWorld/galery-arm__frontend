@@ -41,7 +41,7 @@ form > button {
     color: #666;
 }
 
-h2, h3 {
+h2, h3, label {
     color: black;
     font-family: Montserrat;
     font-weight: 400;
@@ -52,8 +52,13 @@ h2 {
     color: #666;
 }
 
-h3 {
+h3, label {
     font-size: 15px;
+}
+
+label {
+    color: #666;
+    display: block;
 }
 
 .text-active {

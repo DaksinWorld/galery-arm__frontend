@@ -9,16 +9,53 @@
       <router-link to="/Skins">Skins</router-link>
       <router-link to="/Series">Series</router-link>
       <router-link to="/Single">Single</router-link>
-      <router-link style="margin-top: 40px" to="/Colored">Colored</router-link>
-      <router-link to="/BlackAndWhite">B&W</router-link>
+      <div class="filter">
+        <label @click="handleIsColored" v-if="isColoredPick" class="black">Colored</label>
+        <label @click="handleIsColored" v-else >Colored</label>
+        <label @click="handleIsNonColored" v-if="isNonColoredPick" class="black">B&W</label>
+        <label @click="handleIsNonColored" v-else>B&W</label>
+        <span v-if="isColoredPick || isNonColoredPick" @click="reset">Remove Filter</span>
+      </div>
   </div>
 </template>
 <script>
+
+import {ref, watch} from "vue";
+
 export default {
-  data() {
-    return {
+  emits: ['update:modelValue'],
+  props: ['modelValue'],
+  setup(_, {emit}) {
+    const isColoredPick = ref(false)
+    const isNonColoredPick = ref(false)
+
+    const handleIsColored = () => {
+      isColoredPick.value = !isColoredPick.value
+      isNonColoredPick.value = false
     }
-  },
+
+    const handleIsNonColored = () => {
+      isNonColoredPick.value = !isNonColoredPick.value
+      isColoredPick.value = false
+    }
+
+    watch([isColoredPick], values => {
+      emit('update:modelValue', {
+        isColoredPick: values[0],
+      })
+    })
+
+    return {
+      isColoredPick,
+      isNonColoredPick,
+      handleIsColored,
+      handleIsNonColored,
+      reset: () => {
+        isColoredPick.value = null
+        isNonColoredPick.value = null
+      }
+    }
+  }
 }
 </script>
 
@@ -32,5 +69,18 @@ export default {
     color: #666;
     margin-bottom: 18px;
   }
+}
+
+label {
+  margin: 18px 0;
+}
+
+label:first-child {
+  margin-top: 22px;
+}
+
+.black {
+  font-weight: 500;
+  color: black;
 }
 </style>

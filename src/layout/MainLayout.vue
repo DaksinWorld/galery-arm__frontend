@@ -3,8 +3,8 @@
     <div class="container">
       <Nav class="nav"/>
       <div class="layout">
-        <Sidebar/>
-        <router-view />
+        <Sidebar v-model="filter"/>
+        <router-view :requests="requests"/>
       </div>
     </div>
     <footer-bar class="footer-bar"/>
@@ -14,6 +14,8 @@
 import Nav from '../components/Nav'
 import FooterBar from "@/components/FooterBar";
 import Sidebar from "@/components/Sidebar";
+import {useStore} from "vuex";
+import {computed, onMounted, ref} from "vue";
 
 export default {
   components: {
@@ -21,6 +23,34 @@ export default {
     FooterBar,
     Sidebar
   },
+  setup() {
+    const store = useStore()
+    const data = ref()
+    const filter = ref({})
+
+    onMounted(async () => {
+      await store.dispatch('getGallery')
+    })
+
+    const requests = computed(() => store.getters['requests']
+        .filter(request => {
+          if (filter.value) {
+            if (filter.value.isColoredPick) {
+              return request.color.includes('Colored')
+            } else if(filter.value.isColoredPick === false) {
+              return request.color.includes('BlackAndWhite')
+            }
+          }
+          return request
+        })
+    )
+
+    return {
+      data,
+      requests,
+      filter
+    }
+  }
 }
 </script>
 <style lang="scss">

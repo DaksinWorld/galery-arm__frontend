@@ -26,9 +26,17 @@ const routes = [
         }
     },
     {
-        path: '/gallery-page/:id',
+        path: '/gallery/:id',
         name: 'GalleryPage',
         component: () => import('../views/GalleryPage'),
+        meta: {
+            layout: 'main'
+        }
+    },
+    {
+        path: '/gallery-page/:id',
+        name: 'GalleryAllTag',
+        component: () => import('../views/GalleryAllTagPage'),
         meta: {
             layout: 'main'
         }
@@ -70,7 +78,7 @@ const routes = [
         name: 'prints',
         component: () => import('../views/Prints'),
         meta: {
-            layout: 'main'
+            layout: 'void'
         }
     },
     {

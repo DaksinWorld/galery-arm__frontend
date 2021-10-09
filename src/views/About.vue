@@ -16,7 +16,7 @@ export default {
     }
   },
   async mounted() {
-    this.source = await axios.get('http://localhost:1337/about')
+    this.source = await axios.get('https://strapi-postgres22.herokuapp.com/about')
   },
   components: {
     Markdown

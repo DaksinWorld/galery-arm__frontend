@@ -12,8 +12,8 @@ export default createStore({
     setRequests(state, requests) {
       state.requests = requests
     },
-    addRequest(state, request) {
-      state.requests.push(request)
+    setData(state, data) {
+      state.requests = data
     }
   },
   actions: {
@@ -40,9 +40,6 @@ export default createStore({
       } catch (e) {
         console.log(e)
       }
-    },
-    storeData({commit},payload) {
-      commit('setRequests', payload)
     }
   },
   getters: {
@@ -54,7 +51,7 @@ export default createStore({
     },
     requests(state) {
       return state.requests
-    }
+    },
   },
   modules: {
   }
