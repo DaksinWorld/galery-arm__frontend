@@ -3,7 +3,7 @@
     <div class="container">
       <Nav class="nav"/>
       <div class="layout">
-        <router-view :requests="data"/>
+        <router-view v-if="data" :requests="data"/>
       </div>
     </div>
     <footer-bar class="footer-bar"/>

@@ -11,23 +11,26 @@
 </template>
 
 <script>
-
-import {computed} from "vue";
+import {computed, ref} from "vue";
 
 export default {
   props: ['requests'],
   setup(props) {
-    const data = computed(() => props.requests
-      .filter(data => {
-        if(data) {
-          return data.Prints === true
-        }
-        return data
-      })
+    let request = ref(props.requests)
+
+    const data = computed(() => request.value
+          .filter(data => {
+            if(data) {
+              return data.Prints === true
+            }
+            return data
+          })
     )
 
+
     return {
-     data
+      request,
+      data
     }
   }
 }

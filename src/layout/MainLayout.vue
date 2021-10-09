@@ -4,7 +4,7 @@
       <Nav class="nav"/>
       <div class="layout">
         <Sidebar v-model="filter"/>
-        <router-view :requests="requests"/>
+        <router-view v-if="requests" :requests="requests"/>
       </div>
     </div>
     <footer-bar class="footer-bar"/>
