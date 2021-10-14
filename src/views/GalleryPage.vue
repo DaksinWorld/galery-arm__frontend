@@ -1,28 +1,34 @@
 <template>
-  <div v-if="requests[id-1]" class="gallery-style-class">
+  <div v-if="requests[id-1]" class="gallery-style-class container" id="gallery">
     <div class="images">
       <img v-if="id !== 1" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
-      <img class="mainPhoto" :src="`https://strapi-postgres22.herokuapp.com${requests[id-1].image.url}`" alt="image">
+      <img id="photo" class="mainPhoto" :src="requests[id-1].image.url" alt="image">
       <img v-if="requests.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
+      <div class="description" id="descriptionDown">
+        <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
+          this work is part of the "<span class="bold">{{ requests[id - 1].tags }}</span>"
+        </h3>
+        <h3 style="margin-top: 30px" v-if="requests[id-1].description">{{ requests[id-1].description }}</h3>
+      </div>
     </div>
     <div class="information">
       <h3 class="bold">{{ requests[id - 1].name }}</h3>
       <h3>{{ requests[id - 1].createdAt }}</h3>
-      <h3 v-if="requests[id-1].isAvailable">PRINT AVAILABLE</h3>
-      <h3 v-else>PRINT IS NOT AVAILABLE</h3>
-      <h3 v-if="requests[id-1].OpenOrLimited">Limited Edition of {{ requests[id - 1].currentCirculation }}
+      <h3 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
+      <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>
+      <h3 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span> {{ requests[id - 1].currentCirculation }}
         AP</h3>
-      <h3 v-else>Open Edition</h3>
-      <h3>SIZE {{ requests[id - 1].size }}</h3>
+      <h3 v-else style="font-weight: 500">Open Edition</h3>
+      <h3><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</h3>
       <button v-if="requests[id-1].isAvailable" class="buy-print">
         Buy Print
       </button>
-      <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
-        this work is part of the "{{ requests[id - 1].tags }}"
-      </h3>
-      <h3>
-        {{ requests[id-1].description }}
-      </h3>
+      <div id="descriptionRight">
+        <h3 v-if="requests[id-1].description">{{ requests[id-1].description }}</h3>
+        <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
+          this work is part of the "<span class="bold">{{ requests[id - 1].tags }}</span>"
+        </h3>
+      </div>
     </div>
   </div>
 </template>
@@ -44,14 +50,27 @@ export default {
 
     onMounted(async () => {
       await store.dispatch('getGallery')
+
+      let photo = document.getElementById('photo')
+      let gallery = document.getElementById('gallery')
+      let descriptionRight = document.getElementById('descriptionRight')
+      let description = document.getElementById('descriptionDown')
+
+      setTimeout(() => {
+        if(photo.width > 1200) {
+          descriptionRight.style.display = 'none'
+          gallery.classList.add('gallery-class-one-element')
+        } else {
+          gallery.classList.add('gallery-class-two-element')
+          description.remove()
+        }
+      },100)
     })
 
     const requests = computed(() => store.getters['requests']
         .filter(data => {
           if (tag.value) {
             let dataTag = data.tags
-            console.log(dataTag)
-            console.log(dataTag)
             return dataTag.toLowerCase().includes(tag.value[0].toLowerCase())
           }
           return data
@@ -59,14 +78,18 @@ export default {
     )
 
     const navigateMinusOne = () => {
-      console.log(tag.value)
-      console.log(id.value)
-      router.push(`/gallery/${tag.value}_${id.value--}`)
+      let idi = id.value - 1
+      router.push(`/gallery/${tag.value}_${idi}`)
+      setTimeout(() => {
+        location.reload()
+      },100)
     }
     const navigatePlusOne = () => {
-      console.log(tag.value)
-      console.log(id.value)
-      router.push(`/gallery/${tag.value}_${id.value++}`)
+      let idi = id.value + 1
+      router.push(`/gallery/${tag.value}_${idi}`)
+      setTimeout(() => {
+        location.reload()
+      },100)
     }
 
     return {
@@ -83,28 +106,74 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.bold,  {
+  font-weight: 600;
+}
+
+.font-6,h3, span {
+  color: #666 !important;
+}
+
+.gallery-class-one-element {
+  grid-template-areas:
+      'image info'
+      'desc desc'
+;
+  .description {
+    display: block;
+    grid-area: desc;
+  }
+  .images {
+    grid-area: image;
+  }
+  .information {
+    grid-area: info;
+  }
+}
+
+.gallery-class-two-element {
+  grid-template-columns: auto auto;
+  .images {
+    grid-template: "d mainPhoto m" !important;
+    .description {
+      display: none;
+    }
+  }
+}
+
 .gallery-style-class {
   display: grid;
   justify-items: center;
-  grid-template-columns: auto;
   width: 100%;
   .images {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template:
+        "d mainPhoto m"
+        ". description ."
+    ;
     align-items: center;
-
     .mainPhoto {
+      grid-area: mainPhoto;
       max-width: 1300px;
       max-height: 900px;
       object-fit: cover;
       margin: 0 !important;
     }
 
+    .description {
+      grid-area: description;
+    }
+
     .m {
-      margin: 5px;
+      margin: 10px;
+    }
+    .m:first-child {
+      grid-area: d;
+    }
+    .m:last-child {
+      grid-area: m;
     }
   }
-
   .information {
     text-align: center;
 

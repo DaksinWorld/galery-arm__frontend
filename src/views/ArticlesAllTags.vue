@@ -20,7 +20,6 @@ export default {
     onMounted(async () => {
       await store.dispatch('getData')
       articles.value = store.getters['requests']
-      console.log(articles.value)
     })
 
 

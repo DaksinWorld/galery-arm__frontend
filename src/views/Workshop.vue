@@ -1,11 +1,11 @@
 <template>
-  <div v-if="source">
-    <Markdown class="markdown" :source="source.data.workshop"/>
+  <div v-if="source.data">
+    <div v-html="source.data.workshop">
+    </div>
   </div>
 </template>
 
 <script>
-import Markdown from 'vue3-markdown-it';
 import axios from 'axios'
 
 export default {
@@ -16,10 +16,7 @@ export default {
     }
   },
   async mounted() {
-    this.source = await axios.get('https://strapi-postgres22.herokuapp.com/workshop')
-  },
-  components: {
-    Markdown
+    this.source = await axios.get('http://localhost:1337/workshop')
   }
 }
 </script>

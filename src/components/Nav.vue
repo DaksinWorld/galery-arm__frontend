@@ -1,6 +1,6 @@
 <template>
     <nav>
-      <img src="../assets/logo.svg" alt="Logo">
+      <img @click="$router.push('/i/AllPhoto')" src="../assets/logo.svg" alt="Logo">
       <div class="nav-text">
         <h2>
           <router-link to="/info/about">about</router-link>

@@ -1,12 +1,9 @@
 const path = require('path')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = {
-    outputDir: path.resolve(__dirname, './dist'),
+    outputDir: path.resolve(__dirname, '../project/build'),
     devServer: {
-        proxy : {
-            '/': {
-                target: 'https://protected-plains-17913.herokuapp.com'
-            }
-        }
+        proxy: 'http://localhost:1337',
     }
 }
