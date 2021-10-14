@@ -2,7 +2,7 @@
   <div v-if="data[id-1]" class="gallery-style-class container" id="gallery">
     <div class="images">
       <img v-if="id !== 1" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
-      <img id="image" class="mainPhoto" :src="data[id-1].image.url" alt="image">
+      <img id="image" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${data[id-1].image.url}`" alt="image">
       <img v-if="data.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
       <div class="description" id="descriptionDown">
         <h3 class="mt-100px" v-if="data[id-1].isAvailable">

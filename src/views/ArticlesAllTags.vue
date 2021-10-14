@@ -2,7 +2,7 @@
   <div class="articles container">
     <div class="article" v-for="(article,i) in articles" :key="i">
       <h2 class="name">{{article.name}}</h2>
-      <img class="image" :src="article.image.url" alt="">
+      <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="">
       <h2 class="desc">{{article.description}}</h2>
     </div>
   </div>
