@@ -8,7 +8,7 @@
         <h3 class="mt-100px" v-if="data[id-1].isAvailable">
           this work is part of the "<bold style="font-weight: 500">{{ data[id - 1].tags }}</bold>" series
         </h3>
-        <h3 v-if="data[id-1].description">{{ data[id-1].description }}</h3>
+        <h3 style="margin-top: 30px" v-if="data[id-1].description">{{ data[id-1].description }}</h3>
       </div>
     </div>
     <div class="information">
