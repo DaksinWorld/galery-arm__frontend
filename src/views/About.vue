@@ -1,12 +1,10 @@
 <template>
-  <div v-if="source">
-    <Markdown class="markdown" :source="source.data.test"/>
+  <div v-if="source" v-html="source.data.test">
   </div>
 </template>
 
 <script>
-import Markdown from 'vue3-markdown-it';
-import axios from 'axios'
+import axios from '../request/axios'
 
 export default {
   data() {
@@ -16,10 +14,7 @@ export default {
     }
   },
   async mounted() {
-    this.source = await axios.get('https://strapi-postgres22.herokuapp.com/about')
+    this.source = await axios.get('/about')
   },
-  components: {
-    Markdown
-  }
 }
 </script>

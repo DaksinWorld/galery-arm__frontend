@@ -3,7 +3,7 @@
     <div class="flexbin flexbin-margin">
       <a v-for="(gallery) in data" :key="gallery.id">
         <router-link v-slot="{navigate}" custom :to="{name: 'GalleryPage', params: {id: gallery.tags + '_' + gallery.second_id}}">
-          <img :src="`https://strapi-postgres22.herokuapp.com${gallery.image.url}`" alt="image" @click="navigate" :requests="requests">
+          <img :src="gallery.image.url" alt="image" @click="navigate" :requests="requests">
         </router-link>
       </a>
     </div>
