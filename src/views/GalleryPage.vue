@@ -13,7 +13,7 @@
     </div>
     <div class="information">
       <h3 class="bold">{{ requests[id - 1].name }}</h3>
-      <h3>{{ requests[id - 1].createdAt }}</h3>
+      <h3>{{ requests[id - 1].createdYear }}</h3>
       <h3 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
       <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>
       <h3 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span> {{ requests[id - 1].currentCirculation }}
