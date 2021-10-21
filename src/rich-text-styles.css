@@ -25,6 +25,10 @@ h1,h2,h3,h4,h5,h6,a,p,strong {
 }
 
 /* ckeditor5-image/theme/imageresize.css */
+.ck-content {
+    width: 100%;
+}
+
 .ck-content .image.image_resized {
     max-width: 100%;
     display: block;

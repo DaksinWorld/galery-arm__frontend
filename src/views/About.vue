@@ -15,6 +15,7 @@ export default {
   },
   async mounted() {
     this.source = await axios.get('/about')
+    document.baseURI = 'https://quiet-basin-40455.herokuapp.com'
   },
 }
 </script>
