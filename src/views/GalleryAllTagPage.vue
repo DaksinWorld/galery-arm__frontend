@@ -137,6 +137,7 @@ export default {
 
 .gallery-style-class {
   display: grid;
+  justify-content: center;
   width: 100%;
   .images {
     display: grid;
