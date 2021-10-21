@@ -1,5 +1,5 @@
 <template>
-  <div v-if="source" v-html="source.data.test">
+  <div v-if="source" v-html="source.data.test" class="ck-content">
   </div>
 </template>
 

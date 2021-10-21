@@ -1,5 +1,12 @@
 module.exports = {
     devServer: {
-        proxy: 'https://quiet-basin-40455.herokuapp.com'
-    }
+        proxy: {
+            '/': {
+                target: 'https://quiet-basin-40455.herokuapp.com'
+            }
+        }
+    },
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/'
+        : 'https://quiet-basin-40455.herokuapp.com/'
 }

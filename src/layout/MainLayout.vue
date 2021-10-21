@@ -35,10 +35,8 @@ export default {
     const requests = computed(() => store.getters['requests']
         .filter(request => {
           if (filter.value) {
-            if (filter.value.isColoredPick) {
-              return request.color.includes('Colored')
-            } else if(filter.value.isColoredPick === false) {
-              return request.color.includes('BlackAndWhite')
+            if (filter.value.data) {
+              return filter.value.data === request.color
             }
           }
           return request

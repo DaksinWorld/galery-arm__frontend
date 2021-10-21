@@ -15,7 +15,7 @@
       <!--Name-->
       <h3 class="bold">{{ data[id - 1].name }}</h3>
       <!--Created Year-->
-      <h3>{{ data[id - 1].createdAt }}</h3>
+      <h3>{{ data[id - 1].createdYear }}</h3>
       <!--Is print available-->
       <h3 v-if="data[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
       <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>

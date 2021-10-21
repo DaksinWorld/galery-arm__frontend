@@ -14,7 +14,6 @@
         <label @click="handleIsColored" v-else >Colored</label>
         <label @click="handleIsNonColored" v-if="isNonColoredPick" class="black">B&W</label>
         <label @click="handleIsNonColored" v-else>B&W</label>
-        <span v-if="isColoredPick || isNonColoredPick" @click="reset">Remove Filter</span>
       </div>
   </div>
 </template>
@@ -28,20 +27,31 @@ export default {
   setup(_, {emit}) {
     const isColoredPick = ref(false)
     const isNonColoredPick = ref(false)
+    const data = ref()
 
     const handleIsColored = () => {
-      isColoredPick.value = !isColoredPick.value
-      isNonColoredPick.value = false
+      if(isColoredPick.value){
+        isColoredPick.value = false
+        data.value = ''
+      } else {
+        isColoredPick.value = true
+        data.value = 'Colored'
+      }
     }
 
     const handleIsNonColored = () => {
-      isNonColoredPick.value = !isNonColoredPick.value
-      isColoredPick.value = false
+      if(isNonColoredPick.value){
+        isNonColoredPick.value = false
+        data.value = ''
+      } else {
+        isNonColoredPick.value = true
+        data.value = 'BlackAndWhite'
+      }
     }
 
-    watch([isColoredPick], values => {
+    watch([data], values => {
       emit('update:modelValue', {
-        isColoredPick: values[0],
+        data: values[0]
       })
     })
 
@@ -49,11 +59,7 @@ export default {
       isColoredPick,
       isNonColoredPick,
       handleIsColored,
-      handleIsNonColored,
-      reset: () => {
-        isColoredPick.value = null
-        isNonColoredPick.value = null
-      }
+      handleIsNonColored
     }
   }
 }
