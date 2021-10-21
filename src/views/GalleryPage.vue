@@ -1,7 +1,7 @@
 <template>
   <div v-if="requests[id-1]" class="gallery-style-class container" id="gallery">
     <div class="images">
-      <img v-if="id !== 1" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
+      <img :class="{none: id === 1}" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
       <img id="photo" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${requests[id-1].image.url}`" alt="image">
       <img v-if="requests.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
       <div class="description" id="descriptionDown">
@@ -10,24 +10,24 @@
         </h3>
         <h3 style="margin-top: 30px" v-if="requests[id-1].description">{{ requests[id-1].description }}</h3>
       </div>
-    </div>
-    <div class="information">
-      <h3 class="bold">{{ requests[id - 1].name }}</h3>
-      <h3>{{ requests[id - 1].createdYear }}</h3>
-      <h3 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
-      <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>
-      <h3 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span> {{ requests[id - 1].currentCirculation }}
-        AP</h3>
-      <h3 v-else style="font-weight: 500">Open Edition</h3>
-      <h3><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</h3>
-      <button v-if="requests[id-1].isAvailable" class="buy-print">
-        Buy Print
-      </button>
-      <div id="descriptionRight">
-        <h3 v-if="requests[id-1].description">{{ requests[id-1].description }}</h3>
-        <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
-          this work is part of the "<span class="bold">{{ requests[id - 1].tags }}</span>"
-        </h3>
+      <div class="information">
+        <h3 class="bold">{{ requests[id - 1].name }}</h3>
+        <h3>{{ requests[id - 1].createdYear }}</h3>
+        <h3 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
+        <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>
+        <h3 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span> {{ requests[id - 1].currentCirculation }}
+          AP</h3>
+        <h3 v-else style="font-weight: 500">Open Edition</h3>
+        <h3><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</h3>
+        <button v-if="requests[id-1].isAvailable" class="buy-print">
+          Buy Print
+        </button>
+        <div id="descriptionRight">
+          <h3 v-if="requests[id-1].description">{{ requests[id-1].description }}</h3>
+          <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
+            this work is part of the "<span class="bold">{{ requests[id - 1].tags }}</span>"
+          </h3>
+        </div>
       </div>
     </div>
   </div>
@@ -106,6 +106,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.none {
+  opacity: 0;
+}
+
 .bold,  {
   font-weight: 600;
 }
@@ -143,18 +147,53 @@ export default {
 
 .gallery-style-class {
   display: grid;
-  justify-items: center;
   width: 100%;
   .images {
     display: grid;
-    grid-template:
+    grid-template-areas:
         "d mainPhoto m"
         ". description ."
-    ;
+        ". information ." !important;
     align-items: center;
+    justify-content: left;
+
+    .information {
+      grid-area: information;
+      justify-self: left;
+      h2 {
+        margin-top: 30px;
+        color: #666666;
+      }
+
+      .bold {
+        color: black;
+      }
+
+      h2:first-child {
+        margin-top: 0;
+      }
+
+      .buy-print {
+        background: #666;
+        border-radius: 50px;
+        color: white;
+        border: none;
+        padding: 13px 55px;
+        margin-top: 30px;
+        font-family: Montserrat;
+        font-weight: 500;
+        font-size: 20px;
+      }
+
+      .mt-100px {
+        margin-top: 100px;
+      }
+    }
+
     .mainPhoto {
       grid-area: mainPhoto;
       max-width: 1300px;
+      width: 100%;
       max-height: 900px;
       object-fit: cover;
       margin: 0 !important;
@@ -163,47 +202,16 @@ export default {
     .description {
       grid-area: description;
     }
-
     .m {
       margin: 10px;
     }
+
     .m:first-child {
       grid-area: d;
     }
+
     .m:last-child {
       grid-area: m;
-    }
-  }
-  .information {
-    text-align: center;
-
-    h2 {
-      margin-top: 30px;
-      color: #666666;
-    }
-
-    .bold {
-      color: black;
-    }
-
-    h2:first-child {
-      margin-top: 0;
-    }
-
-    .buy-print {
-      background: #666;
-      border-radius: 50px;
-      color: white;
-      border: none;
-      padding: 13px 55px;
-      margin-top: 30px;
-      font-family: Montserrat;
-      font-weight: 500;
-      font-size: 20px;
-    }
-
-    .mt-100px {
-      margin-top: 100px;
     }
   }
 }
@@ -211,7 +219,6 @@ export default {
 @media screen and (max-width: 1760px) {
   .gallery-style-class {
     grid-template-columns: auto;
-    justify-items: center;
   }
 }
 </style>

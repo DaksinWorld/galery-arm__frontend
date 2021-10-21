@@ -11,11 +11,13 @@ export default {
   data() {
 
     return{
-      source: ''
+      source: '',
+      str: ''
     }
   },
   async mounted() {
     this.source = await axios.get('/workshop')
+    this.str = this.source.data.workshop.replace(/src="/gm, 'src="https://quiet-basin-40455.herokuapp.com')
   }
 }
 </script>

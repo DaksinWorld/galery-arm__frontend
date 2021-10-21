@@ -68,6 +68,7 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   width: 100px;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
   a {

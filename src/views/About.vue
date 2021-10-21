@@ -1,5 +1,5 @@
 <template>
-  <div v-if="source" v-html="source.data.test" class="ck-content">
+  <div v-if="str" v-html="str" class="ck-content">
   </div>
 </template>
 
@@ -10,12 +10,13 @@ export default {
   data() {
 
     return{
-      source: ''
+      source: '',
+      str: ''
     }
   },
   async mounted() {
     this.source = await axios.get('/about')
-    document.baseURI = 'https://quiet-basin-40455.herokuapp.com'
+    this.str = this.source.data.test.replace(/src="/gm, 'src="https://quiet-basin-40455.herokuapp.com')
   },
 }
 </script>

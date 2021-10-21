@@ -15,6 +15,7 @@ export default {
   },
   async mounted() {
     this.source = await axios.get('/contact')
+    this.str = this.source.data.contact.replace(/src="/gm, 'src="https://quiet-basin-40455.herokuapp.com')
   },
 }
 </script>
