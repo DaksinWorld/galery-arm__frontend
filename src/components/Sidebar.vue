@@ -1,14 +1,8 @@
 <template>
-  <div class="sidebar">
-      <router-link to="/i/allPhoto" query>All Photo</router-link>
-      <router-link to="/PaperWork">Paper work</router-link>
-      <router-link to="/Portal">Portal</router-link>
-      <router-link to="/Phlegm">Phlegm</router-link>
-      <router-link to="/Compact">Compact</router-link>
-      <router-link to="/Jellyfish">Jellyfish</router-link>
-      <router-link to="/Skins">Skins</router-link>
-      <router-link to="/Series">Series</router-link>
-      <router-link to="/Single">Single</router-link>
+  <div>
+      <div class="sidebar" v-for="(s, i) in sidebar" :key="i">
+        <router-link :to="`/${s.path}`">{{ s.name }}</router-link>
+      </div>
       <div class="filter">
         <label @click="handleIsColored" v-if="isColoredPick" class="black">Colored</label>
         <label @click="handleIsColored" v-else >Colored</label>
@@ -18,7 +12,6 @@
   </div>
 </template>
 <script>
-
 import {ref, watch} from "vue";
 
 export default {
@@ -28,6 +21,41 @@ export default {
     const isColoredPick = ref(false)
     const isNonColoredPick = ref(false)
     const data = ref()
+
+    const sidebar = ref({
+      allPhoto: {
+        name:"All Photo",
+        path:"i/allPhoto"
+      },
+      PaperWork: {
+        name:"Paper Work",
+        path:"PaperWork"
+      },
+      Portal: {
+        name:"Portal",
+        path:"Portal"
+      },
+      Phlegm: {
+        name:"Phlegm",
+        path:"Phlegm"
+      },
+      Compact: {
+        name:"Compact",
+        path:"Compact"
+      },
+      Jellyfish: {
+        name:"Jellyfish",
+        path:"Jellyfish"
+      },
+      Series: {
+        name:"Series",
+        path:"Series"
+      },
+      Single: {
+        name:"Single",
+        path:"Single"
+      },
+    })
 
     const handleIsColored = () => {
       if(isColoredPick.value){
@@ -58,6 +86,7 @@ export default {
     return {
       isColoredPick,
       isNonColoredPick,
+      sidebar,
       handleIsColored,
       handleIsNonColored
     }
