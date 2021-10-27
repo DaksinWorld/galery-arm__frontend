@@ -2,6 +2,8 @@
   <div>
     <div class="container">
       <Nav class="nav"/>
+    </div>
+    <div class="container2">
       <div class="layout">
         <router-view v-if="data" :requests="data"/>
       </div>
@@ -34,5 +36,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.container2 {
+  width: 1200px;
+  margin: 0 auto;
+}
 </style>

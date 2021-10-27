@@ -2,20 +2,22 @@
   <div v-if="requests[id-1]" class="gallery-style-class container" id="gallery">
     <div class="images">
       <img :class="{none: id === 1}" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
-      <img id="photo" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${requests[id-1].image.url}`" alt="image">
+      <img id="photo" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${requests[id-1].image.url}`"
+           alt="image">
       <img v-if="requests.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
       <div class="description" id="descriptionDown">
         <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
           this work is part of the "<span class="bold">{{ requests[id - 1].tags }}</span>"
         </h3>
-        <h3 style="margin-top: 30px" v-if="requests[id-1].description">{{ requests[id-1].description }}</h3>
+        <h3 style="margin-top: 30px" v-if="requests[id-1].description">{{ requests[id - 1].description }}</h3>
       </div>
       <div class="information">
         <h3 class="bold">{{ requests[id - 1].name }}</h3>
         <h3>{{ requests[id - 1].createdYear }}</h3>
         <h3 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
         <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>
-        <h3 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span> {{ requests[id - 1].currentCirculation }}
+        <h3 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
+          {{ requests[id - 1].currentCirculation }}
           AP</h3>
         <h3 v-else style="font-weight: 500">Open Edition</h3>
         <h3><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</h3>
@@ -23,9 +25,11 @@
           Buy Print
         </button>
         <div id="descriptionRight">
-          <h3 v-if="requests[id-1].description">{{ requests[id-1].description }}</h3>
-          <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
-            this work is part of the "<span class="bold">{{ requests[id - 1].tags }}</span>"
+          <h3 v-if="requests[id-1].description">{{ requests[id - 1].description }}</h3>
+          <h3 class="mt-100px" v-if="requests[id-1].isAvailable && requests[id-1].tags">
+            this work is part of the "
+            <router-link :to="`/${requests[id-1].tags}`" class="bold">{{ requests[id - 1].tags }}</router-link>
+            " series
           </h3>
         </div>
       </div>
@@ -48,24 +52,27 @@ export default {
     let tag = ref(routeId.value.match(/[a-zA-Z]+/gm))
     let id = ref(parseInt(routeId.value.match(/\d+/gm)[0], 10))
 
-    onMounted(async () => {
-      await store.dispatch('getGallery')
+    onMounted( async() => {
+        await store.dispatch('getGallery')
 
-      let photo = document.getElementById('photo')
-      let gallery = document.getElementById('gallery')
-      let descriptionRight = document.getElementById('descriptionRight')
-      let description = document.getElementById('descriptionDown')
+        let photo = document.getElementById('photo')
+        let gallery = document.getElementById('gallery')
+        let descriptionRight = document.getElementById('descriptionRight')
+        let description = document.getElementById('descriptionDown')
 
-      setTimeout(() => {
-        if(photo.width > 1200) {
+        console.log(photo.width)
+
+        if (photo.width > 1200) {
           descriptionRight.style.display = 'none'
           gallery.classList.add('gallery-class-one-element')
         } else {
           gallery.classList.add('gallery-class-two-element')
           description.remove()
         }
-      },100)
     })
+
+
+
 
     const requests = computed(() => store.getters['requests']
         .filter(data => {
@@ -82,14 +89,14 @@ export default {
       router.push(`/gallery/${tag.value}_${idi}`)
       setTimeout(() => {
         location.reload()
-      },100)
+      }, 100)
     }
     const navigatePlusOne = () => {
       let idi = id.value + 1
       router.push(`/gallery/${tag.value}_${idi}`)
       setTimeout(() => {
         location.reload()
-      },100)
+      }, 500)
     }
 
     return {
@@ -110,57 +117,67 @@ export default {
   opacity: 0;
 }
 
-.bold,  {
+.bold, {
   font-weight: 600;
 }
 
-.font-6,h3, span {
+.font-6, h3, span {
   color: #666 !important;
 }
 
 .gallery-class-one-element {
-  grid-template-areas:
-      'image info'
-      'desc desc'
-;
-  .description {
-    display: block;
-    grid-area: desc;
-  }
-  .images {
-    grid-area: image;
-  }
-  .information {
-    grid-area: info;
-  }
-}
-
-.gallery-class-two-element {
-  grid-template-columns: auto auto;
-  .images {
-    grid-template: "d mainPhoto m" !important;
-    .description {
-      display: none;
-    }
-  }
-}
-
-.gallery-style-class {
-  justify-content: center;
-  display: grid;
-  width: 100%;
   .images {
     display: grid;
     grid-template-areas:
         "d mainPhoto m"
         ". description ."
-        ". information ." !important;
+        ". info ." !important;
+    align-items: center;
+    justify-content: left;
+
+    .description {
+      display: block;
+      grid-area: desc;
+    }
+
+    .information {
+      grid-area: info;
+    }
+  }
+
+}
+
+.gallery-class-two-element {
+  grid-template-columns: auto auto;
+
+  .images {
+    grid-template: "d mainPhoto m info" !important;
+
+    .description {
+      display: none;
+    }
+
+    .information {
+      margin-left: 50px;
+      align-self: start !important;
+    }
+  }
+}
+
+.gallery-style-class {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+
+  .images {
+    display: grid;
     align-items: center;
     justify-content: left;
 
     .information {
-      grid-area: information;
+      grid-area: info;
       justify-self: left;
+
       h2 {
         margin-top: 30px;
         color: #666666;
@@ -203,6 +220,7 @@ export default {
     .description {
       grid-area: description;
     }
+
     .m {
       margin: 10px;
     }

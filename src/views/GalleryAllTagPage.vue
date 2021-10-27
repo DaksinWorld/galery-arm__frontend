@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data[id-1]" class="gallery-style-class container" id="gallery">
+  <div v-if="data[id-1]"  class="gallery-style-class container" id="gallery">
     <div class="images">
       <img :class="{none: id === 1}" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
       <img id="image" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${data[id-1].image.url}`" alt="image">
@@ -27,8 +27,8 @@
         Buy Print
       </button>
       <div id="descriptionRight">
-        <h3 class="mt-100px" v-if="data[id-1].isAvailable">
-          this work is part of the "<span class="bold">{{ data[id - 1].tags }}</span>" series
+        <h3 class="mt-100px" v-if="data[id-1].isAvailable && data[id-1].tags">
+          this work is part of the "<router-link :to="`/${data[id-1].tags}`" class="bold">{{ data[id - 1].tags }}</router-link>" series
         </h3>
         <h3 v-if="data[id-1].description">{{ data[id-1].description }}</h3>
       </div>
@@ -53,20 +53,21 @@ export default {
     onMounted(async() => {
       await store.dispatch('getGallery', route.params.id)
       data.value = store.getters['requests']
+        setTimeout(() => {
+          let photo = document.getElementById('image')
+          let gallery = document.getElementById('gallery')
+          let descriptionRight = document.getElementById('descriptionRight')
+          let description = document.getElementById('descriptionDown')
 
-      setTimeout(() => {
-        let photo = document.getElementById('image')
-        let gallery = document.getElementById('gallery')
-        let descriptionRight = document.getElementById('descriptionRight')
-        let description = document.getElementById('descriptionDown')
-        if(photo.width > 1200) {
-          descriptionRight.style.display = 'none'
-          gallery.classList.add('gallery-class-one-element')
-        } else {
-          gallery.classList.add('gallery-class-two-element')
-          description.remove()
-        }
-      },200)
+
+          if(photo.width > 1200) {
+            descriptionRight.style.display = 'none'
+            gallery.classList.add('gallery-class-one-element')
+          } else {
+            gallery.classList.add('gallery-class-two-element')
+            description.remove()
+          }
+        },500)
     })
 
     const navigateMinusOne = () => {
@@ -109,28 +110,27 @@ export default {
 }
 
 .gallery-class-one-element {
-  grid-template-areas:
-      'image info'
-      'desc desc'
-;
-  .description {
-    display: block;
-    grid-area: desc;
-  }
-  .images {
-    grid-area: image;
-  }
-  .information {
-    grid-area: info;
+  .image {
+    display: grid;
+    grid-template-areas:
+        "d mainPhoto m"
+        ". description ."
+        ". info ." !important;
+    align-items: center;
+    justify-content: left;
   }
 }
 
 .gallery-class-two-element {
   grid-template-columns: auto auto;
   .images {
-    grid-template: "d mainPhoto m" !important;
+    grid-template: "d mainPhoto m info" !important;
     .description {
       display: none;
+    }
+    .information {
+      margin-left: 50px;
+      align-self: start !important;
     }
   }
 }
@@ -141,15 +141,10 @@ export default {
   width: 100%;
   .images {
     display: grid;
-    grid-template-areas:
-        "d mainPhoto m"
-        ". description ."
-        ". information ." !important;
     align-items: center;
     justify-content: left;
-
     .information {
-      grid-area: information;
+      grid-area: info;
       justify-self: left;
       h2 {
         margin-top: 30px;
