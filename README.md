@@ -50,4 +50,6 @@ name, path - не изменяем
 копируем команды: 
 - npm run build
 - git add . && git commit -m "new commit" && git push
+
+И вставляем в терминал.
 ****
