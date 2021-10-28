@@ -81,7 +81,7 @@ label {
 
 .text-active {
     color: black !important;
-    font-weight: var(--fontWeight-Menu-Active);
+    font-weight: var(--fontWeight-Menu-Active) !important;
 }
 
 a {

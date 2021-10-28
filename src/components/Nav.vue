@@ -1,6 +1,6 @@
 <template>
     <nav>
-      <img @click="$router.push('/i/AllPhoto')" src="../assets/logo.svg" alt="Logo">
+      <img @click="$router.push('/i/AllPhoto')" class="logo" src="../assets/logo.svg" alt="Logo">
       <div class="nav-text">
         <span class="nav-item">
           <router-link to="/info/about">about</router-link>
@@ -79,6 +79,12 @@ nav {
     .nav-text{
       display: none;
     }
+  }
+}
+
+@media screen and (max-width: 420px){
+  .logo {
+    width: 300px;
   }
 }
 

@@ -7,18 +7,15 @@
         <router-view />
       </div>
     </div>
-    <footer-bar class="footer-bar"/>
   </div>
 </template>
 <script>
 import Nav from '../components/Nav'
-import FooterBar from "@/components/FooterBar";
 import TagsSidebar from "@/components/TagsSidebar";
 
 export default {
   components: {
     Nav,
-    FooterBar,
     TagsSidebar
   },
 }

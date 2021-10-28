@@ -7,12 +7,10 @@
         <router-view v-if="requests" :requests="requests"/>
       </div>
     </div>
-    <footer-bar class="footer-bar"/>
   </div>
 </template>
 <script>
 import Nav from '../components/Nav'
-import FooterBar from "@/components/FooterBar";
 import Sidebar from "@/components/Sidebar";
 import {useStore} from "vuex";
 import {computed, onMounted, ref} from "vue";
@@ -20,7 +18,6 @@ import {computed, onMounted, ref} from "vue";
 export default {
   components: {
     Nav,
-    FooterBar,
     Sidebar
   },
   setup() {
@@ -61,22 +58,17 @@ export default {
   flex-direction: row;
 }
 
-.footer-bar {
+.footer {
   display: none;
+}
+
+.sidebar {
+  display: block;
 }
 
 @media screen and (max-width: 1110px) {
   .layout {
     margin-top: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    display: none !important;
-  }
-  .footer-bar {
-    display: block;
   }
 }
 </style>
