@@ -5,6 +5,11 @@
     --fontFamily: Montserrat;
     --fontWeightBold: 500;
     --fontWeightNormal: 400;
+    /*Menu*/
+    --fontSize-Menu: 20px;
+    --fontWeight-Menu-Normal: 400;
+    --fontWeight-Menu-Active: 500;
+    --MenuGap: 40px;
 }
 
 h1 {
@@ -76,7 +81,7 @@ label {
 
 .text-active {
     color: black !important;
-    font-weight: var(--fontWeightBold);
+    font-weight: var(--fontWeight-Menu-Active);
 }
 
 a {

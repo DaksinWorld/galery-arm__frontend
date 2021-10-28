@@ -55,6 +55,10 @@ export default {
         name:"Single",
         path:"Single"
       },
+      adaddas: {
+        name:"Single2",
+        path:"Single12"
+      },
     })
 
     const handleIsColored = () => {

@@ -2,24 +2,24 @@
     <nav>
       <img @click="$router.push('/i/AllPhoto')" src="../assets/logo.svg" alt="Logo">
       <div class="nav-text">
-        <h2>
+        <span class="nav-item">
           <router-link to="/info/about">about</router-link>
-        </h2>
-        <h2>
+        </span>
+        <span class="nav-item">
           <router-link to="/i/allPhoto">Gallery</router-link>
-        </h2>
-        <h2>
+        </span>
+        <span class="nav-item">
           <router-link to="/info/prints">PRINTS</router-link>
-        </h2>
-        <h2>
+        </span>
+        <span class="nav-item">
           <router-link to="/info/workshop">WORKSHOP</router-link>
-        </h2>
-        <h2>
+        </span>
+        <span class="nav-item">
           <router-link to="/article">ARTICLES</router-link>
-        </h2>
-        <h2>
+        </span>
+        <span class="nav-item">
           <router-link to="/info/contact">CONTACT</router-link>
-        </h2>
+        </span>
       </div>
     </nav>
 </template>
@@ -42,11 +42,13 @@ nav {
     text-transform: uppercase;
     justify-self: right;
     align-items: center;
-    h2 {
-      margin-right: 30px;
+    .nav-item {
+      margin-right: var(--MenuGap);
+      font-size: var(--fontSize-Menu);
+      font-weight: var(--fontWeight-Menu-Normal);
     }
-    h2:last-child {
-      margin-right: 0px;
+    .nav-item:last-child {
+      margin-right: 0;
     }
   }
 }

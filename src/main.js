@@ -7,6 +7,6 @@ import './rich-text-styles.css'
 import './font/font.css'
 // Libraries
 import Markdown from 'vue3-markdown-it'
+import VueLazyLoad from 'vue3-lazyload'
 
-
-createApp(App).use(Markdown).use(store).use(router).mount('#app')
+createApp(App).use(VueLazyLoad).use(Markdown).use(store).use(router).mount('#app')

@@ -59,6 +59,7 @@ export default {
           let descriptionRight = document.getElementById('descriptionRight')
           let description = document.getElementById('descriptionDown')
 
+          console.log(photo.width)
 
           if(photo.width > 1200) {
             descriptionRight.style.display = 'none'
@@ -67,7 +68,7 @@ export default {
             gallery.classList.add('gallery-class-two-element')
             description.remove()
           }
-        },500)
+        },1000)
     })
 
     const navigateMinusOne = () => {
@@ -110,14 +111,16 @@ export default {
 }
 
 .gallery-class-one-element {
-  .image {
+  .images {
     display: grid;
     grid-template-areas:
-        "d mainPhoto m"
-        ". description ."
-        ". info ." !important;
+        "d mainPhoto m info"
+        ". description . info" !important;
     align-items: center;
     justify-content: left;
+    .information {
+      align-self: self-start;
+    }
   }
 }
 
