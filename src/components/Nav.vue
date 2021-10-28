@@ -32,7 +32,7 @@ name: "Nav"
 
 <style lang="scss" scoped>
 .logo {
-  height: 42px;
+  height: 43px;
 }
 
 nav {
