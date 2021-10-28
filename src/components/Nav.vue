@@ -31,6 +31,10 @@ name: "Nav"
 </script>
 
 <style lang="scss" scoped>
+.logo {
+  height: 42px;
+}
+
 nav {
   padding-top: 5px;
   display: grid;
