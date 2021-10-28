@@ -3,7 +3,8 @@
     <div class="article" v-for="(article,i) in requests" :key="i">
       <h2 class="name">{{article.name}}</h2>
       <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="image">
-      <h2 class="desc">{{article.description}}</h2>
+      <div class="desc" v-html="article.description"></div>
+      {{article}}
     </div>
   </div>
 </template>
