@@ -16,7 +16,7 @@ export default {
       this.$router.push(`/gallery-page/${i+1}`)
       setTimeout(() => {
         location.reload()
-      },25)
+      },300)
     }
   }
 }

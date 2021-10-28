@@ -34,7 +34,7 @@ export default {
       router.push(`/gallery/${tags+'_'+id}`)
       setTimeout(() => {
         location.reload()
-      },500)
+      },300)
     }
 
     const lazyOptions = reactive({
