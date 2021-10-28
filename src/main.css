@@ -10,6 +10,12 @@
     --fontWeight-Menu-Normal: 400;
     --fontWeight-Menu-Active: 500;
     --MenuGap: 40px;
+    /*CKEDITOR*/
+    --fontFamilyEditor: "Libre Baskerville";
+}
+
+* {
+    font-family: Montserrat;
 }
 
 h1 {

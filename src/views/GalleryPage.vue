@@ -129,9 +129,9 @@ export default {
   .images {
     display: grid;
     grid-template-areas:
-        "d mainPhoto m"
-        ". description ."
-        ". info ." !important;
+          "d mainPhoto m"
+          ". description ."
+          ". info ." !important;
     align-items: center;
     justify-content: left;
 
@@ -151,7 +151,7 @@ export default {
   grid-template-columns: auto auto;
 
   .images {
-    grid-template: "d mainPhoto m info" !important;
+    grid-template: "d mainPhoto m info";
 
     .description {
       display: none;
@@ -236,8 +236,16 @@ export default {
 }
 
 @media screen and (max-width: 1760px) {
-  .gallery-style-class {
-    grid-template-columns: auto;
+  .images {
+    grid-template:
+        "d mainPhoto m"
+        ". info ."
+        ". description ."
+    !important;
+  ;
+    .information{
+      margin: 0 !important;
+    }
   }
 }
 </style>

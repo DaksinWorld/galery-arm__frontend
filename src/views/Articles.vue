@@ -4,7 +4,6 @@
       <h2 class="name">{{article.name}}</h2>
       <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="image">
       <div class="desc" v-html="article.description"></div>
-      {{article}}
     </div>
   </div>
 </template>

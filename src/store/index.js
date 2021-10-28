@@ -25,6 +25,14 @@ export default createStore({
         console.log(e)
       }
     },
+    async getCurrentArticle({commit}, payload) {
+      try {
+        const {data} = await axios.get(`/articles/${payload}`)
+        commit('setRequests', data)
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async getGallery({commit}) {
       try {
         const {data} = await axios.get(`/gallery-photos`)

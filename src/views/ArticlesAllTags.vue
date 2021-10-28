@@ -1,9 +1,10 @@
 <template>
   <div class="articles container">
-    <div class="article" v-for="(article,i) in articles" :key="i">
-      <h2 class="name">{{article.name}}</h2>
-      <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="">
-      <h2 class="desc">{{article.description}}</h2>
+    <div class="article" v-for="(article,i) in articles" :key="i" @click="navigate(article._id)">
+        <h2 class="name">{{article.name}}</h2>
+        <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="">
+        <div class="desc" v-html="article.description">
+        </div>
     </div>
   </div>
 </template>
@@ -11,20 +12,27 @@
 <script>
 import {useStore} from 'vuex'
 import { ref, onMounted} from 'vue'
+import {useRouter} from "vue-router";
 
 export default {
   setup() {
     const store = useStore()
     let articles = ref([])
+    const router = useRouter()
 
     onMounted(async () => {
       await store.dispatch('getData')
       articles.value = store.getters['requests']
     })
 
+    const navigate = (id) => {
+      router.push(`/article-page/${id}`)
+    }
+
 
     return {
-      articles
+      articles,
+      navigate
     }
   },
 }
@@ -60,5 +68,9 @@ export default {
       align-self: center;
     }
   }
+}
+
+* {
+  font-family: Montserrat;
 }
 </style>

@@ -20,3 +20,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+  * {
+    font-family: "Libre Baskerville";
+  }
+</style>

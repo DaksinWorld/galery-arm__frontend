@@ -44,11 +44,7 @@
     </div>
   </div>
   <div class="footerBar">
-    <div class="navigation">
-      <img v-if="isSidebarActive" @click="isSidebarActive = !isSidebarActive" src="../assets/close.png" alt="close">
-      <img v-else @click="isSidebarActive = !isSidebarActive; isNavbarActive = false" src="../assets/menu.png" alt="menu">
-    </div>
-    <router-link to="/i/allPhoto">ALL TAGS</router-link>
+    <span @click="isSidebarActive = !isSidebarActive; isNavbarActive = false">ALL TAGS</span>
     <div class="navigation">
       <img v-if="isNavbarActive" @click="isNavbarActive = !isNavbarActive" src="../assets/close.png" alt="close">
       <img v-else @click="isNavbarActive = !isNavbarActive; isSidebarActive = false" src="../assets/menu.png" alt="menu">
@@ -57,6 +53,7 @@
 </template>
 <script>
 import {ref, watch} from "vue";
+import {useRouter} from "vue-router";
 
 export default {
   emits: ['update:modelValue'],
@@ -67,6 +64,7 @@ export default {
     const data = ref()
     const isSidebarActive = ref()
     const isNavbarActive = ref()
+    const route = useRouter()
 
     const sidebar = ref({
       allPhoto: {
@@ -140,7 +138,8 @@ export default {
       handleIsColored,
       handleIsNonColored,
       isSidebarActive,
-      isNavbarActive
+      isNavbarActive,
+      route
     }
   }
 }
@@ -168,7 +167,7 @@ export default {
   left: 0;
   bottom: 100px;
   z-index: 100;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   text-align:center;
   justify-content: center;

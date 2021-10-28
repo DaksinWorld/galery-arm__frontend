@@ -34,6 +34,14 @@ const routes = [
         }
     },
     {
+        path: '/article-page/:id',
+        name: 'ArticlePage',
+        component: () => import('../views/ArticlePage'),
+        meta: {
+            layout: 'tags'
+        }
+    },
+    {
         path: '/gallery-page/:id',
         name: 'GalleryAllTag',
         component: () => import('../views/GalleryAllTagPage'),
