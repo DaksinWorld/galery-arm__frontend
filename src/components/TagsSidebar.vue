@@ -69,8 +69,9 @@ export default {
   display: flex;
   flex-direction: column;
   a {
-    font-size: 15px;
+    font-size: var(--fontSize-Menu);
     color: #666;
+    font-weight: var(--fontWeight-Menu-Normal);
     margin-bottom: 18px;
   }
 }

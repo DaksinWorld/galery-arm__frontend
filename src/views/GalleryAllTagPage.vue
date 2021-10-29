@@ -146,6 +146,7 @@ export default {
     display: grid;
     align-items: center;
     justify-content: left;
+    gap: 50px;
     .information {
       grid-area: info;
       justify-self: left;

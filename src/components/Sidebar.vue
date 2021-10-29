@@ -146,6 +146,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sidebar {
+  min-width: 100px;
+  width: 11.5vw;
+  display: flex;
+  flex-direction:column
+
+}
+
 .footerBar {
   display: none;
   position: fixed;
@@ -185,9 +193,9 @@ export default {
   flex-direction: column;
 
   a {
-    font-size: 15px !important;
+    font-size: 1em !important;
     color: #666;
-    margin-bottom: 18px;
+    line-height: 2em;
   }
 }
 

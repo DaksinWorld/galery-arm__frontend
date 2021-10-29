@@ -3,15 +3,17 @@
     --fontSize-h2: 20px;
     --fontSize-h3: 15px;
     --fontFamily: Montserrat;
-    --fontWeightBold: 500;
-    --fontWeightNormal: 400;
     /*Menu*/
-    --fontSize-Menu: 20px;
-    --fontWeight-Menu-Normal: 400;
-    --fontWeight-Menu-Active: 500;
-    --MenuGap: 40px;
     /*CKEDITOR*/
     --fontFamilyEditor: "Libre Baskerville";
+    --fontFamily: Montserrat;
+    --fontWeightBold: 400;
+    --fontWeightNormal: 300;
+    --fontSize-Menu: 1em;
+    --fontWeight-Menu-Normal: 300;
+    --fontWeight-Menu-Active: 400;
+    --MenuGap: 1.25em;
+
 }
 
 * {
