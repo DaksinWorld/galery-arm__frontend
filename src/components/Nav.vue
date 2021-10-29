@@ -9,7 +9,7 @@
           <router-link to="/i/allPhoto">Gallery</router-link>
         </span>
         <span class="nav-item">
-          <router-link to="/info/prints">PRINTS</router-link>
+          <router-link style="color: #e5e5e5" to="/info/prints">PRINTS</router-link>
         </span>
         <span class="nav-item">
           <router-link to="/info/workshop">WORKSHOP</router-link>
