@@ -65,14 +65,14 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
-  width: 234px;
+  min-width: 100px;
+  width: 11.5vw;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   a {
-    font-size: var(--fontSize-Menu);
+    font-size: 1em !important;
     color: #666;
-    font-weight: var(--fontWeight-Menu-Normal);
-    margin-bottom: 18px;
+    line-height: 2em;
   }
 }
 
