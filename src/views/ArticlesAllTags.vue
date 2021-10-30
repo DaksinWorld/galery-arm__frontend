@@ -1,5 +1,5 @@
 <template>
-  <div class="articles container">
+  <div class="articles container2">
     <div class="article" v-for="(article,i) in articles" :key="i" @click="navigate(article._id)">
         <h2 class="name">{{article.name}}</h2>
         <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="">
@@ -39,6 +39,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container2 {
+  width: 1200px;
+}
+
 .articles {
   display: grid;
   align-content: space-between;
@@ -60,6 +64,7 @@ export default {
     .name {
       grid-area: name;
       font-weight: 500;
+      font-family: var(--fontFamilyEditor);
     }
 
     .desc {

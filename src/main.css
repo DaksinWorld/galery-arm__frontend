@@ -6,18 +6,20 @@
     /*Menu*/
     /*CKEDITOR*/
     --fontFamilyEditor: "Libre Baskerville";
-    --fontFamily: Montserrat;
     --fontWeightBold: 400;
     --fontWeightNormal: 300;
     --fontSize-Menu: 1em;
     --fontWeight-Menu-Normal: 300;
     --fontWeight-Menu-Active: 400;
     --MenuGap: 1.25em;
+}
 
+body {
+    background: #e7e7e7;
 }
 
 * {
-    font-family: Montserrat;
+    font-family: "Libre Baskerville";
 }
 
 h1 {
@@ -69,7 +71,6 @@ form > button {
 
 h2, h3, label {
     color: black;
-    font-family: var(--fontFamily);
     font-weight: var(--fontWeightNormal);
 }
 

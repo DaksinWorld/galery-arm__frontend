@@ -44,7 +44,10 @@
     </div>
   </div>
   <div class="footerBar">
-    <span @click="isSidebarActive = !isSidebarActive; isNavbarActive = false">ALL TAGS</span>
+    <div class="navigation">
+      <img v-if="isSidebarActive" @click="isSidebarActive = !isSidebarActive" src="../assets/close.png" alt="close">
+      <img v-else @click="isSidebarActive = !isSidebarActive; isNavbarActive = false" src="../assets/menu.png" alt="menu">
+    </div>
     <div class="navigation">
       <img v-if="isNavbarActive" @click="isNavbarActive = !isNavbarActive" src="../assets/close.png" alt="close">
       <img v-else @click="isNavbarActive = !isNavbarActive; isSidebarActive = false" src="../assets/menu.png" alt="menu">
@@ -52,8 +55,8 @@
   </div>
 </template>
 <script>
-import {ref, watch} from "vue";
-import {useRouter} from "vue-router";
+import {onMounted, ref, watch} from "vue";
+import {useRoute} from "vue-router";
 
 export default {
   emits: ['update:modelValue'],
@@ -61,10 +64,11 @@ export default {
   setup(_, {emit}) {
     const isColoredPick = ref(false)
     const isNonColoredPick = ref(false)
+    const route = useRoute()
     const data = ref()
+    const id = ref()
     const isSidebarActive = ref()
     const isNavbarActive = ref()
-    const route = useRouter()
 
     const sidebar = ref({
       allPhoto: {
@@ -99,6 +103,14 @@ export default {
         name: "Single",
         path: "Single"
       },
+    })
+
+    onMounted(() => {
+      setTimeout(() => {
+        let routeID = route.params.id
+        id.value = routeID.match(/[a-zA-Z]+/gm)[0]
+        console.log(id.value)
+      }, 200)
     })
 
     const handleIsColored = () => {
@@ -139,7 +151,7 @@ export default {
       handleIsNonColored,
       isSidebarActive,
       isNavbarActive,
-      route
+      id
     }
   }
 }
@@ -157,6 +169,7 @@ export default {
 .footerBar {
   display: none;
   position: fixed;
+  z-index: 1;
   bottom: 0;
   left: 0;
   height: 100px;
@@ -202,6 +215,7 @@ export default {
 label {
   margin: 18px 0;
   font-size: 15px;
+  font-family: Montserrat !important;
 }
 
 label:first-child {

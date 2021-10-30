@@ -52,9 +52,10 @@ export default {
     let tag = ref(routeId.value.match(/[a-zA-Z]+/gm))
     let id = ref(parseInt(routeId.value.match(/\d+/gm)[0], 10))
 
-    onMounted( async() => {
-        await store.dispatch('getGallery')
+    onMounted(async () => {
+      await store.dispatch('getGallery')
 
+      setTimeout(() => {
         let photo = document.getElementById('photo')
         let gallery = document.getElementById('gallery')
         let descriptionRight = document.getElementById('descriptionRight')
@@ -69,9 +70,8 @@ export default {
           gallery.classList.add('gallery-class-two-element')
           description.remove()
         }
+      }, 1000)
     })
-
-
 
 
     const requests = computed(() => store.getters['requests']
@@ -96,7 +96,7 @@ export default {
       router.push(`/gallery/${tag.value}_${idi}`)
       setTimeout(() => {
         location.reload()
-      }, 500)
+      }, 100)
     }
 
     return {
@@ -129,9 +129,8 @@ export default {
   .images {
     display: grid;
     grid-template-areas:
-          "d mainPhoto m"
-          ". description ."
-          ". info ." !important;
+          "d mainPhoto m info"
+          ". description description ." !important;
     align-items: center;
     justify-content: left;
 
@@ -142,6 +141,7 @@ export default {
 
     .information {
       grid-area: info;
+      align-self: start;
     }
   }
 
@@ -151,7 +151,9 @@ export default {
   grid-template-columns: auto auto;
 
   .images {
-    grid-template: "d mainPhoto m info";
+    grid-template:
+        "d mainPhoto m info"
+  ;
 
     .description {
       display: none;
@@ -174,6 +176,7 @@ export default {
     align-items: center;
     justify-content: left;
     gap: 50px;
+
     .information {
       grid-area: info;
       justify-self: left;
@@ -192,13 +195,13 @@ export default {
       }
 
       .buy-print {
-        background: #666;
+        background: #c7c7c7;
         border-radius: 50px;
-        color: white;
+        color: #666;
         border: none;
         padding: 13px 55px;
         margin-top: 30px;
-        font-family: Montserrat;
+        font-family: var(--fontFamilyEditor);
         font-weight: 500;
         font-size: 20px;
       }
@@ -240,12 +243,37 @@ export default {
     grid-template:
         "d mainPhoto m"
         ". info ."
-        ". description ."
-    !important;
-  ;
-    .information{
+        ". description ." !important;;
+
+    .information {
       margin: 0 !important;
     }
   }
 }
+
+@media screen and (max-width: 1480px) {
+  .images {
+    grid-template-areas:
+          "d mainPhoto m"
+          ". info ."
+          ". description .";
+    .m, .d {
+      width: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .images {
+    grid-template-areas:
+          "d mainPhoto m"
+          ". info ."
+          ". description .";
+    gap: 20px !important;
+    .m, .d {
+      width: 20px;
+    }
+  }
+}
+
 </style>

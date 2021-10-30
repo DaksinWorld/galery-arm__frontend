@@ -32,5 +32,6 @@ export default {
 <style scoped>
 .title {
   font-weight: 600;
+  font-family: var(--fontFamilyEditor);
 }
 </style>

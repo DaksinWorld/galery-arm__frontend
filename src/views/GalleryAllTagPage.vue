@@ -102,11 +102,11 @@ export default {
   opacity: 0;
 }
 
-.bold,  {
+.bold, {
   font-weight: 600;
 }
 
-.font-6,h3, span {
+.font-6, h3, span {
   color: #666 !important;
 }
 
@@ -114,23 +114,36 @@ export default {
   .images {
     display: grid;
     grid-template-areas:
-        "d mainPhoto m info"
-        ". description . info" !important;
+          "d mainPhoto m info"
+          ". description description ." !important;
     align-items: center;
     justify-content: left;
+
+    .description {
+      display: block;
+      grid-area: desc;
+    }
+
     .information {
-      align-self: self-start;
+      grid-area: info;
+      align-self: start;
     }
   }
+
 }
 
 .gallery-class-two-element {
   grid-template-columns: auto auto;
+
   .images {
-    grid-template: "d mainPhoto m info" !important;
+    grid-template:
+        "d mainPhoto m info"
+  ;
+
     .description {
       display: none;
     }
+
     .information {
       margin-left: 50px;
       align-self: start !important;
@@ -142,14 +155,17 @@ export default {
   display: grid;
   justify-content: center;
   width: 100%;
+
   .images {
     display: grid;
     align-items: center;
     justify-content: left;
     gap: 50px;
+
     .information {
       grid-area: info;
       justify-self: left;
+
       h2 {
         margin-top: 30px;
         color: #666666;
@@ -164,13 +180,13 @@ export default {
       }
 
       .buy-print {
-        background: #666;
+        background: #c7c7c7;
         border-radius: 50px;
-        color: white;
+        color: #666;
         border: none;
         padding: 13px 55px;
         margin-top: 30px;
-        font-family: Montserrat;
+        font-family: var(--fontFamilyEditor);
         font-weight: 500;
         font-size: 20px;
       }
@@ -192,6 +208,7 @@ export default {
     .description {
       grid-area: description;
     }
+
     .m {
       margin: 10px;
     }
@@ -207,8 +224,40 @@ export default {
 }
 
 @media screen and (max-width: 1760px) {
-  .gallery-style-class {
-    grid-template-columns: auto;
+  .images {
+    grid-template:
+        "d mainPhoto m"
+        ". info ."
+        ". description ." !important;;
+
+    .information {
+      margin: 0 !important;
+    }
+  }
+}
+
+@media screen and (max-width: 1480px) {
+  .images {
+    grid-template-areas:
+          "d mainPhoto m"
+          ". info ."
+          ". description .";
+    .m, .d {
+      width: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .images {
+    grid-template-areas:
+          "d mainPhoto m"
+          ". info ."
+          ". description .";
+    gap: 20px !important;
+    .m, .d {
+      width: 20px;
+    }
   }
 }
 </style>

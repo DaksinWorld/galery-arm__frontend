@@ -2,7 +2,7 @@
   <div class="container gallery" v-if="data">
     <div class="flexbin flexbin-margin">
       <a v-for="(gallery) in data" :key="gallery.id">
-        <img v-lazy="{src: `https://quiet-basin-40455.herokuapp.com${gallery.image.url}`}" alt="image" @click="navigate(gallery.second_id,gallery.tags)" :requests="requests">
+        <img class="el" v-lazy="{src: `https://quiet-basin-40455.herokuapp.com${gallery.image.url}`}" alt="image" @click="navigate(gallery.second_id,gallery.tags)" :requests="requests">
       </a>
     </div>
   </div>
@@ -62,21 +62,18 @@ export default {
 <style lang="scss" scoped>
 @import "~flexbin/flexbin.css";
 
+.flexbin > * {
+  height: 400px !important;
+}
+
+.el {
+  height: 400px !important;
+  cursor: pointer;
+}
+
 .gallery {
   display: flex;
   flex-direction: row;
-  .elements {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-    .element, img {
-      height: 400px;
-      object-fit: cover;
-      background: #566666;
-      border: 1px solid black;
-      margin:0 !important;
-    }
-  }
 }
 
 @media screen and (max-width: 860px) {
