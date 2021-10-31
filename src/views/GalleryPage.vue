@@ -6,42 +6,42 @@
            alt="image">
       <img v-if="requests.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
       <div v-if="isActive" class="description" id="descriptionDown">
-        <h3 v-if="requests[id-1].isAvailable">
+        <span class="image-text" v-if="requests[id-1].isAvailable">
           this work is part of the "
           <bold style="font-weight: 500">{{ requests[id - 1].tags }}</bold>
           " series
-        </h3>
-        <h3 style="margin-top: 30px" v-if="requests[id-1].description">{{ requests[id - 1].description }}</h3>
+        </span>
+        <span class="image-text" style="margin-top: 30px" v-if="requests[id-1].description">{{ requests[id - 1].description }}</span>
       </div>
       <div class="information" v-if="isActive">
         <!--Name-->
         <div class="h3">
-          <h2 class="bold">{{ requests[id - 1].name }}</h2>
+          <span class="image-text bold">{{ requests[id - 1].name }}</span>
           <!--Created Year-->
-          <h2>{{ requests[id - 1].createdYear }}</h2>
+          <span class="image-text">{{ requests[id - 1].createdYear }}</span>
           <!--Is print available-->
-          <h2 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h2>
-          <h2 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h2>
+          <span class="image-text" v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</span>
+          <span class="image-text" v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</span>
           <!--Edition-->
-          <h2 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
+          <span class="image-text" v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
             {{ requests[id - 1].currentCirculation }}
-            AP</h2>
-          <h2 v-else style="font-weight: 500">OPEN EDITION</h2>
-          <h2><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</h2>
+            AP</span>
+          <span class="image-text" v-else style="font-weight: 500">OPEN EDITION</span>
+          <span class="image-text"><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</span>
         </div>
         <div class="description-right" id="descriptionRight">
-          <h2 v-if="requests[id-1].isAvailable && requests[id-1].tags">
+          <span class="image-text" v-if="requests[id-1].isAvailable && requests[id-1].tags">
             this work is part of the "
             <router-link :to="`/${requests[id-1].tags}`" class="bold">{{ requests[id - 1].tags }}</router-link>
             " series
-          </h2>
-          <h2 v-if="requests[id-1].description">{{ requests[id - 1].description }}</h2>
+          </span>
+          <span class="image-text" v-if="requests[id-1].description">{{ requests[id - 1].description }}</span>
           <button v-if="requests[id-1].isAvailable" class="buy-print">
             Buy Print
           </button>
         </div>
       </div>
-      <h2 class="more" v-if="!isActive" @click="isActive = !isActive">Подробнее</h2>
+      <span class="image-text more" v-if="!isActive" @click="isActive = !isActive">Подробнее</span>
     </div>
   </div>
 </template>
@@ -63,7 +63,11 @@ export default {
     let id = ref(parseInt(routeId.value.match(/\d+/gm)[0], 10))
 
     onMounted(async () => {
-      await store.dispatch('getGallery')
+      document.body.style.display = 'none'
+      setTimeout(() => {
+        document.body.style.display = 'block'
+      }, 1650)
+      await store.dispatch('getGallery');
 
       setTimeout(() => {
         let gallery = document.querySelector('#gallery')
@@ -71,11 +75,11 @@ export default {
 
         let id2 = id.value - 1
 
-        if(window.innerWidth > 768 && requests.value[id2].image.width > 598) {
-          isActive.value = true
-        } else {
+        if(window.innerWidth < 768 && requests.value[id2].image.width < 600) {
           isActive.value = false
           images.classList.add('moreInfo')
+        } else {
+          isActive.value = true
         }
 
         if (requests.value[id2].image.width > 1200) {
@@ -177,6 +181,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.h3 {
+  display: flex;
+  flex-direction: column;
+}
+
+.description-right {
+  display: flex;
+  flex-direction: column;
+}
+
 .none {
   opacity: 0;
 }
@@ -206,7 +220,7 @@ export default {
     display: grid;
     grid-template-areas:
           "d mainPhoto m"
-          ". info ." ;
+          ". info .";
     align-items: center;
     justify-content: left;
 
@@ -269,7 +283,7 @@ export default {
     .information {
       grid-area: info;
 
-      h2 {
+      span {
         margin-top: 30px;
         color: #666666;
       }
@@ -278,7 +292,7 @@ export default {
         color: black;
       }
 
-      h2:first-child {
+      span:first-child {
         margin-top: 0;
       }
 
@@ -377,8 +391,9 @@ export default {
   .images {
     grid-template-areas:
           "d mainPhoto m"
+          ". more ."
           ". info ."
-          ". description .";
+          ". description ." !important;
     gap: 20px !important;
 
     .m, .d {

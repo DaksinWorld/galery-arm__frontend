@@ -12,6 +12,11 @@
     --fontWeight-Menu-Normal: 300;
     --fontWeight-Menu-Active: 400;
     --MenuGap: 1.25em;
+    --fontSizeImage: 0.9rem;
+}
+
+.image-text {
+    font-size: var(--fontSizeImage);
 }
 
 body {
