@@ -47,6 +47,7 @@ export default {
   display: grid;
   align-content: space-between;
   grid-template-columns: 1fr 1fr;
+  padding-left: 6vw;
   .article {
     display: grid;
     grid-template-areas:
@@ -77,5 +78,11 @@ export default {
 
 * {
   font-family: Montserrat;
+}
+
+@media screen and (max-width: 1400px ) {
+  .articles {
+    grid-template-columns: auto;
+  }
 }
 </style>

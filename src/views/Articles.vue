@@ -1,5 +1,5 @@
 <template>
-  <div class="articles container" v-if="requests">
+  <div class="articles container2" v-if="requests">
     <div class="article" v-for="(article,i) in requests" :key="i">
       <h2 class="name">{{article.name}}</h2>
       <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="image">
@@ -40,10 +40,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container2 {
+  width: 1200px;
+}
+
 .articles {
   display: grid;
   align-content: space-between;
   grid-template-columns: 1fr 1fr;
+  padding-left: 6vw;
   .article {
     display: grid;
     grid-template-areas:
@@ -68,6 +73,12 @@ export default {
       grid-area: description;
       align-self: center;
     }
+  }
+}
+
+@media screen and (max-width: 1400px ) {
+  .articles {
+    grid-template-columns: auto;
   }
 }
 </style>

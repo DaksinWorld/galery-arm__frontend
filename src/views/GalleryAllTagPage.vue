@@ -1,97 +1,169 @@
 <template>
-  <div v-if="data[id-1]"  class="gallery-style-class container" id="gallery">
+  <div v-if="data[id-1]" class="gallery-style-class container" id="gallery">
     <div class="images">
       <img :class="{none: id === 1}" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
-      <img id="image" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${data[id-1].image.url}`" alt="image">
+      <img id="image" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${data[id-1].image.url}`"
+           alt="image">
       <img v-if="data.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
-      <div class="description" id="descriptionDown">
-        <h3 class="mt-100px" v-if="data[id-1].isAvailable">
-          this work is part of the "<bold style="font-weight: 500">{{ data[id - 1].tags }}</bold>" series
+      <div v-if="isActive" class="description" id="descriptionDown">
+        <h3 v-if="data[id-1].isAvailable">
+          this work is part of the "
+          <bold style="font-weight: 500">{{ data[id - 1].tags }}</bold>
+          " series
         </h3>
-        <h3 style="margin-top: 30px" v-if="data[id-1].description">{{ data[id-1].description }}</h3>
+        <h3 style="margin-top: 30px" v-if="data[id-1].description">{{ data[id - 1].description }}</h3>
       </div>
-      <div class="information">
-      <!--Name-->
-      <h3 class="bold">{{ data[id - 1].name }}</h3>
-      <!--Created Year-->
-      <h3>{{ data[id - 1].createdYear }}</h3>
-      <!--Is print available-->
-      <h3 v-if="data[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
-      <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>
-      <!--Edition-->
-      <h3 v-if="data[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span> {{ data[id - 1].currentCirculation }}
-        AP</h3>
-      <h3 v-else style="font-weight: 500">OPEN EDITION</h3>
-      <h3><span class="bold font-6">SIZE</span> {{ data[id - 1].size }}</h3>
-      <button v-if="data[id-1].isAvailable" class="buy-print">
-        Buy Print
-      </button>
-      <div id="descriptionRight">
-        <h3 class="mt-100px" v-if="data[id-1].isAvailable && data[id-1].tags">
-          this work is part of the "<router-link :to="`/${data[id-1].tags}`" class="bold">{{ data[id - 1].tags }}</router-link>" series
-        </h3>
-        <h3 v-if="data[id-1].description">{{ data[id-1].description }}</h3>
+      <div class="information" v-if="isActive">
+        <!--Name-->
+        <div class="h3">
+          <h2 class="bold">{{ data[id - 1].name }}</h2>
+          <!--Created Year-->
+          <h2>{{ data[id - 1].createdYear }}</h2>
+          <!--Is print available-->
+          <h2 v-if="data[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h2>
+          <h2 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h2>
+          <!--Edition-->
+          <h2 v-if="data[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
+            {{ data[id - 1].currentCirculation }}
+            AP</h2>
+          <h2 v-else style="font-weight: 500">OPEN EDITION</h2>
+          <h2><span class="bold font-6">SIZE</span> {{ data[id - 1].size }}</h2>
+        </div>
+        <div class="description-right" id="descriptionRight">
+          <h2 v-if="data[id-1].isAvailable && data[id-1].tags">
+            this work is part of the "
+            <router-link :to="`/${data[id-1].tags}`" class="bold">{{ data[id - 1].tags }}</router-link>
+            " series
+          </h2>
+          <h2 v-if="data[id-1].description">{{ data[id - 1].description }}</h2>
+          <button v-if="data[id-1].isAvailable" class="buy-print">
+            Buy Print
+          </button>
+        </div>
       </div>
-    </div>
+      <h2 class="more" v-if="!isActive" @click="isActive = !isActive">Подробнее</h2>
     </div>
   </div>
 </template>
 
 <script>
-import {ref, onMounted} from 'vue'
-import {useRoute} from 'vue-router'
-import {useRouter} from 'vue-router'
+import {onMounted, ref} from 'vue'
+import {useRoute, useRouter} from 'vue-router'
 import {useStore} from 'vuex'
+
 export default {
-  setup(){
+  setup() {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
     let data = ref([])
+    let isActive = ref(false)
     let id = ref(parseInt(route.params.id))
 
-    onMounted(async() => {
+    onMounted(async () => {
       await store.dispatch('getGallery', route.params.id)
       data.value = store.getters['requests']
-        setTimeout(() => {
-          let photo = document.getElementById('image')
-          let gallery = document.getElementById('gallery')
-          let descriptionRight = document.getElementById('descriptionRight')
-          let description = document.getElementById('descriptionDown')
 
-          console.log(photo.width)
 
-          if(photo.width > 1200) {
-            descriptionRight.style.display = 'none'
-            gallery.classList.add('gallery-class-one-element')
-          } else {
-            gallery.classList.add('gallery-class-two-element')
-            description.remove()
-          }
-        },1000)
-    })
+      // IMAGE WIDTH
 
-    const navigateMinusOne = () => {
-      let id = parseInt(route.params.id, 10) - 1
-      router.push(`/gallery-page/${id}`)
       setTimeout(() => {
-        location.reload()
-      },600)
-    }
+        let gallery = document.querySelector('#gallery')
+        let images = document.querySelector('.images')
+
+        let id2 = id.value - 1
+
+        if(window.innerWidth > 768 && data.value[id2].image.width > 598) {
+          isActive.value = true
+        } else {
+          isActive.value = false
+          images.classList.add('moreInfo')
+        }
+
+
+        if (data.value[id2].image.width > 1200) {
+          gallery.classList.add('gallery-class-one-element')
+        } else {
+          gallery.classList.add('gallery-class-two-element')
+        }
+
+
+        // SWIPE
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+
+        var xDown = null;
+        var yDown = null;
+
+        //
+        function handleTouchStart(evt) {
+          xDown = evt.touches[0].clientX;
+          yDown = evt.touches[0].clientY;
+        }
+
+        //
+        function handleTouchMove(evt) {
+          if (!xDown || !yDown) {
+            return;
+          }
+
+          var xUp = evt.touches[0].clientX;
+          var yUp = evt.touches[0].clientY;
+
+          var xDiff = xDown - xUp;
+          var yDiff = yDown - yUp;
+
+          if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+            if (xDiff > 0) {
+              if (data.value.length !== id.value) {
+                let id = parseInt(route.params.id, 10) + 1
+                router.push(`/gallery-page/${id}`)
+                setTimeout(() => {
+                  location.reload()
+                }, 600)
+              }
+            } else {
+              if (id.value !== 1) {
+                let id = parseInt(route.params.id, 10) - 1
+                router.push(`/gallery-page/${id}`)
+                setTimeout(() => {
+                  location.reload()
+                }, 600)
+              }
+            }
+          }
+
+          xDown = null;
+          yDown = null;
+        }
+      }, 600)
+
+
+      //onMounted
+    })
 
     const navigatePlusOne = () => {
       let id = parseInt(route.params.id, 10) + 1
       router.push(`/gallery-page/${id}`)
       setTimeout(() => {
         location.reload()
-      },600)
+      }, 600)
+    }
+
+    const navigateMinusOne = () => {
+      let id = parseInt(route.params.id, 10) - 1
+      router.push(`/gallery-page/${id}`)
+      setTimeout(() => {
+        location.reload()
+      }, 600)
     }
 
     return {
       data,
-      navigateMinusOne,
+      id,
       navigatePlusOne,
-      id
+      navigateMinusOne,
+      isActive
     }
   }
 }
@@ -100,6 +172,18 @@ export default {
 <style lang="scss" scoped>
 .none {
   opacity: 0;
+}
+
+.moreInfo {
+    grid-template-areas:
+          "d mainPhoto m"
+          ". more ."
+          ". info ." !important;
+
+}
+
+.mt-20px {
+  margin-top: 20px;
 }
 
 .bold, {
@@ -114,19 +198,32 @@ export default {
   .images {
     display: grid;
     grid-template-areas:
-          "d mainPhoto m info"
-          ". description description ." !important;
+          "d mainPhoto m"
+          ". info .";
     align-items: center;
     justify-content: left;
 
     .description {
-      display: block;
+      display: none;
       grid-area: desc;
     }
 
     .information {
       grid-area: info;
-      align-self: start;
+      display: grid;
+      grid-template-areas:
+          "h3 description";
+      gap: 50px;
+      align-items: start;
+
+      .description-right {
+        grid-area: description;
+        margin: 0 !important;
+      }
+
+      .h3 {
+        grid-area: h3;
+      }
     }
   }
 
@@ -137,8 +234,7 @@ export default {
 
   .images {
     grid-template:
-        "d mainPhoto m info"
-  ;
+        "d mainPhoto m info";
 
     .description {
       display: none;
@@ -152,9 +248,10 @@ export default {
 }
 
 .gallery-style-class {
-  display: grid;
+  display: flex;
   justify-content: center;
   width: 100%;
+  flex-direction: column;
 
   .images {
     display: grid;
@@ -164,7 +261,6 @@ export default {
 
     .information {
       grid-area: info;
-      justify-self: left;
 
       h2 {
         margin-top: 30px;
@@ -228,7 +324,8 @@ export default {
     grid-template:
         "d mainPhoto m"
         ". info ."
-        ". description ." !important;;
+        ". description ."
+        ". more .";
 
     .information {
       margin: 0 !important;
@@ -242,6 +339,7 @@ export default {
           "d mainPhoto m"
           ". info ."
           ". description .";
+
     .m, .d {
       width: 30px;
     }
@@ -255,9 +353,34 @@ export default {
           ". info ."
           ". description .";
     gap: 20px !important;
+
+    .information {
+      grid-template:"h3"
+        "description"
+      !important;
+    }
+
     .m, .d {
       width: 20px;
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .images {
+    grid-template-areas:
+          "d mainPhoto m"
+          ". info ."
+          ". description .";
+    gap: 20px !important;
+
+    .m, .d {
+      display: none;
+    }
+  }
+  .more {
+    grid-area: more;
+  }
+}
+
 </style>

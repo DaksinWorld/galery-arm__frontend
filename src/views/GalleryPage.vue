@@ -2,37 +2,46 @@
   <div v-if="requests[id-1]" class="gallery-style-class container" id="gallery">
     <div class="images">
       <img :class="{none: id === 1}" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
-      <img id="photo" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${requests[id-1].image.url}`"
+      <img id="image" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${requests[id-1].image.url}`"
            alt="image">
       <img v-if="requests.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
-      <div class="description" id="descriptionDown">
-        <h3 class="mt-100px" v-if="requests[id-1].isAvailable">
-          this work is part of the "<span class="bold">{{ requests[id - 1].tags }}</span>"
+      <div v-if="isActive" class="description" id="descriptionDown">
+        <h3 v-if="requests[id-1].isAvailable">
+          this work is part of the "
+          <bold style="font-weight: 500">{{ requests[id - 1].tags }}</bold>
+          " series
         </h3>
         <h3 style="margin-top: 30px" v-if="requests[id-1].description">{{ requests[id - 1].description }}</h3>
       </div>
-      <div class="information">
-        <h3 class="bold">{{ requests[id - 1].name }}</h3>
-        <h3>{{ requests[id - 1].createdYear }}</h3>
-        <h3 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h3>
-        <h3 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h3>
-        <h3 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
-          {{ requests[id - 1].currentCirculation }}
-          AP</h3>
-        <h3 v-else style="font-weight: 500">Open Edition</h3>
-        <h3><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</h3>
-        <button v-if="requests[id-1].isAvailable" class="buy-print">
-          Buy Print
-        </button>
-        <div id="descriptionRight">
-          <h3 v-if="requests[id-1].description">{{ requests[id - 1].description }}</h3>
-          <h3 class="mt-100px" v-if="requests[id-1].isAvailable && requests[id-1].tags">
+      <div class="information" v-if="isActive">
+        <!--Name-->
+        <div class="h3">
+          <h2 class="bold">{{ requests[id - 1].name }}</h2>
+          <!--Created Year-->
+          <h2>{{ requests[id - 1].createdYear }}</h2>
+          <!--Is print available-->
+          <h2 v-if="requests[id-1].isAvailable" style="font-weight: 500">PRINT AVAILABLE</h2>
+          <h2 v-else style="font-weight: 500">PRINT IS NOT AVAILABLE</h2>
+          <!--Edition-->
+          <h2 v-if="requests[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
+            {{ requests[id - 1].currentCirculation }}
+            AP</h2>
+          <h2 v-else style="font-weight: 500">OPEN EDITION</h2>
+          <h2><span class="bold font-6">SIZE</span> {{ requests[id - 1].size }}</h2>
+        </div>
+        <div class="description-right" id="descriptionRight">
+          <h2 v-if="requests[id-1].isAvailable && requests[id-1].tags">
             this work is part of the "
             <router-link :to="`/${requests[id-1].tags}`" class="bold">{{ requests[id - 1].tags }}</router-link>
             " series
-          </h3>
+          </h2>
+          <h2 v-if="requests[id-1].description">{{ requests[id - 1].description }}</h2>
+          <button v-if="requests[id-1].isAvailable" class="buy-print">
+            Buy Print
+          </button>
         </div>
       </div>
+      <h2 class="more" v-if="!isActive" @click="isActive = !isActive">Подробнее</h2>
     </div>
   </div>
 </template>
@@ -48,6 +57,7 @@ export default {
     const router = useRouter()
     const store = useStore()
     let data = ref()
+    let isActive = ref()
     let routeId = ref(route.params.id)
     let tag = ref(routeId.value.match(/[a-zA-Z]+/gm))
     let id = ref(parseInt(routeId.value.match(/\d+/gm)[0], 10))
@@ -56,21 +66,74 @@ export default {
       await store.dispatch('getGallery')
 
       setTimeout(() => {
-        let photo = document.getElementById('photo')
-        let gallery = document.getElementById('gallery')
-        let descriptionRight = document.getElementById('descriptionRight')
-        let description = document.getElementById('descriptionDown')
+        let gallery = document.querySelector('#gallery')
+        let images = document.querySelector('.images')
 
-        console.log(photo.width)
+        let id2 = id.value - 1
 
-        if (photo.width > 1200) {
-          descriptionRight.style.display = 'none'
+        if(window.innerWidth > 768 && requests.value[id2].image.width > 598) {
+          isActive.value = true
+        } else {
+          isActive.value = false
+          images.classList.add('moreInfo')
+        }
+
+        if (requests.value[id2].image.width > 1200) {
           gallery.classList.add('gallery-class-one-element')
         } else {
           gallery.classList.add('gallery-class-two-element')
-          description.remove()
         }
-      }, 1000)
+
+
+        // SWIPE
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+
+        var xDown = null;
+        var yDown = null;
+
+        //
+        function handleTouchStart(evt) {
+          xDown = evt.touches[0].clientX;
+          yDown = evt.touches[0].clientY;
+        }
+
+        //
+        function handleTouchMove(evt) {
+          if (!xDown || !yDown) {
+            return;
+          }
+
+          var xUp = evt.touches[0].clientX;
+          var yUp = evt.touches[0].clientY;
+
+          var xDiff = xDown - xUp;
+          var yDiff = yDown - yUp;
+
+          if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+            if (xDiff > 0) {
+              if (requests.value.length !== id.value) {
+                let idi = id.value + 1
+                router.push(`/gallery/${tag.value}_${idi}`)
+                setTimeout(() => {
+                  location.reload()
+                }, 100)
+              }
+            } else {
+              if (id.value !== 1) {
+                let idi = id.value - 1
+                router.push(`/gallery/${tag.value}_${idi}`)
+                setTimeout(() => {
+                  location.reload()
+                }, 100)
+              }
+            }
+          }
+
+          xDown = null;
+          yDown = null;
+        }
+      }, 300)
     })
 
 
@@ -107,6 +170,7 @@ export default {
       requests,
       navigatePlusOne,
       navigateMinusOne,
+      isActive
     }
   }
 }
@@ -115,6 +179,18 @@ export default {
 <style lang="scss" scoped>
 .none {
   opacity: 0;
+}
+
+.moreInfo {
+  grid-template-areas:
+          "d mainPhoto m"
+          ". more ."
+          ". info ." !important;
+
+}
+
+.mt-20px {
+  margin-top: 20px;
 }
 
 .bold, {
@@ -129,19 +205,32 @@ export default {
   .images {
     display: grid;
     grid-template-areas:
-          "d mainPhoto m info"
-          ". description description ." !important;
+          "d mainPhoto m"
+          ". info ." ;
     align-items: center;
     justify-content: left;
 
     .description {
-      display: block;
+      display: none;
       grid-area: desc;
     }
 
     .information {
       grid-area: info;
-      align-self: start;
+      display: grid;
+      grid-template-areas:
+          "h3 description";
+      gap: 50px;
+      align-items: start;
+
+      .description-right {
+        grid-area: description;
+        margin: 0 !important;
+      }
+
+      .h3 {
+        grid-area: h3;
+      }
     }
   }
 
@@ -152,8 +241,7 @@ export default {
 
   .images {
     grid-template:
-        "d mainPhoto m info"
-  ;
+        "d mainPhoto m info";
 
     .description {
       display: none;
@@ -167,9 +255,10 @@ export default {
 }
 
 .gallery-style-class {
-  display: grid;
+  display: flex;
   justify-content: center;
   width: 100%;
+  flex-direction: column;
 
   .images {
     display: grid;
@@ -179,7 +268,6 @@ export default {
 
     .information {
       grid-area: info;
-      justify-self: left;
 
       h2 {
         margin-top: 30px;
@@ -243,7 +331,8 @@ export default {
     grid-template:
         "d mainPhoto m"
         ". info ."
-        ". description ." !important;;
+        ". description ."
+        ". more .";
 
     .information {
       margin: 0 !important;
@@ -257,6 +346,7 @@ export default {
           "d mainPhoto m"
           ". info ."
           ". description .";
+
     .m, .d {
       width: 30px;
     }
@@ -270,9 +360,33 @@ export default {
           ". info ."
           ". description .";
     gap: 20px !important;
+
+    .information {
+      grid-template:"h3"
+        "description"
+      !important;
+    }
+
     .m, .d {
       width: 20px;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .images {
+    grid-template-areas:
+          "d mainPhoto m"
+          ". info ."
+          ". description .";
+    gap: 20px !important;
+
+    .m, .d {
+      display: none;
+    }
+  }
+  .more {
+    grid-area: more;
   }
 }
 

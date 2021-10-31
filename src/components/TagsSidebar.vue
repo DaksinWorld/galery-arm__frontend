@@ -10,34 +10,36 @@
     <router-link to="/articles/Series">Series three hundred bucks</router-link>
     <router-link to="/articles/Single">My Single </router-link>
   </div>
-  <div class="menu" @click="isSidebarActive = false;" v-if="isSidebarActive">
-    <router-link to="/article">All tags</router-link>
-    <router-link to="/articles/AboutAss">About ass</router-link>
-    <router-link to="/articles/AboutAssAndShit">About ass and shit</router-link>
-    <router-link to="/articles/AmoutLive">Amout live</router-link>
-    <router-link to="/articles/CompactHole">Compact hole</router-link>
-    <router-link to="/articles/Jellyfish">Jellyfish in water</router-link>
-    <router-link to="/articles/Skins">Skins of clash</router-link>
-    <router-link to="/articles/Series">Series three hundred bucks</router-link>
-    <router-link to="/articles/Single">My Single </router-link>
+  <div class="menu" @click="isSidebarActive = false;" v-if="isSidebarActive || isNavbarActive">
+    <div class="menu" v-if="isSidebarActive">
+      <router-link to="/article">All tags</router-link>
+      <router-link to="/articles/AboutAss">About ass</router-link>
+      <router-link to="/articles/AboutAssAndShit">About ass and shit</router-link>
+      <router-link to="/articles/AmoutLive">Amout live</router-link>
+      <router-link to="/articles/CompactHole">Compact hole</router-link>
+      <router-link to="/articles/Jellyfish">Jellyfish in water</router-link>
+      <router-link to="/articles/Skins">Skins of clash</router-link>
+      <router-link to="/articles/Series">Series three hundred bucks</router-link>
+      <router-link to="/articles/Single">My Single </router-link>
+    </div>
     <div class="navbarMenu" v-if="isNavbarActive">
       <h2>
-        <router-link to="/about">about</router-link>
+        <router-link to="/info/about">about</router-link>
       </h2>
       <h2>
         <router-link to="/i/allPhoto">Gallery</router-link>
       </h2>
       <h2>
-        <router-link to="/prints">PRINTS</router-link>
+        <router-link to="/info/prints">PRINTS</router-link>
       </h2>
       <h2>
-        <router-link to="/workshop">WORKSHOP</router-link>
+        <router-link to="/info/workshop">WORKSHOP</router-link>
       </h2>
       <h2>
-        <router-link to="/articles">ARTICLES</router-link>
+        <router-link to="/info/article">ARTICLES</router-link>
       </h2>
       <h2>
-        <router-link to="/contact">CONTACT</router-link>
+        <router-link to="/info/contact">CONTACT</router-link>
       </h2>
     </div>
   </div>
@@ -45,6 +47,10 @@
     <div class="navigation">
       <img v-if="isSidebarActive" @click="isSidebarActive = !isSidebarActive" src="../assets/close.png" alt="close">
       <img v-else @click="isSidebarActive = !isSidebarActive;" src="../assets/menu.png" alt="menu">
+    </div>
+    <div class="navigation">
+      <img v-if="isNavbarActive" @click="isNavbarActive = !isNavbarActive" src="../assets/close.png" alt="close">
+      <img v-else @click="isNavbarActive = !isNavbarActive;" src="../assets/menu.png" alt="menu">
     </div>
   </div>
 </template>
@@ -54,10 +60,12 @@ import {ref} from 'vue'
 
 export default {
   setup(){
-    let isSidebarActive = ref()
+    let isSidebarActive = ref(false)
+    let isNavbarActive = ref(false)
 
     return {
-      isSidebarActive
+      isSidebarActive,
+      isNavbarActive
     }
   }
 }

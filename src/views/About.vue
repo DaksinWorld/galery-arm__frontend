@@ -1,5 +1,7 @@
 <template>
-  <div v-if="str" v-html="str" class="ck-content">
+  <div class="container2">
+    <div v-if="str" v-html="str" class="ck-content">
+    </div>
   </div>
 </template>
 
@@ -23,5 +25,10 @@ export default {
 <style scoped>
   * {
     font-family: "Libre Baskerville";
+  }
+
+  .container2 {
+    width: 1200px;
+    margin: 0 auto;
   }
 </style>

@@ -1,7 +1,9 @@
 <template>
-  <div v-if="source.data" v-html="source.data.workshop" class="ck-content">
-
+  <div class="container2">
+    <div v-if="source.data" v-html="source.data.workshop" class="ck-content">
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -24,5 +26,10 @@ export default {
 <style scoped>
 * {
   font-family: "Libre Baskerville";
+}
+
+.container2 {
+  width: 1200px;
+  margin: 0 auto;
 }
 </style>

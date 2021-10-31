@@ -24,22 +24,22 @@
     </div>
     <div class="navbarMenu" v-if="isNavbarActive">
       <h2>
-        <router-link to="/about">about</router-link>
+        <router-link to="/info/about">about</router-link>
       </h2>
       <h2>
         <router-link to="/i/allPhoto">Gallery</router-link>
       </h2>
       <h2>
-        <router-link to="/prints">PRINTS</router-link>
+        <router-link to="/info/prints">PRINTS</router-link>
       </h2>
       <h2>
-        <router-link to="/workshop">WORKSHOP</router-link>
+        <router-link to="/info/workshop">WORKSHOP</router-link>
       </h2>
       <h2>
-        <router-link to="/articles">ARTICLES</router-link>
+        <router-link to="/article">ARTICLES</router-link>
       </h2>
       <h2>
-        <router-link to="/contact">CONTACT</router-link>
+        <router-link to="/info/contact">CONTACT</router-link>
       </h2>
     </div>
   </div>
@@ -55,8 +55,7 @@
   </div>
 </template>
 <script>
-import {onMounted, ref, watch} from "vue";
-import {useRoute} from "vue-router";
+import { ref, watch} from "vue";
 
 export default {
   emits: ['update:modelValue'],
@@ -64,9 +63,7 @@ export default {
   setup(_, {emit}) {
     const isColoredPick = ref(false)
     const isNonColoredPick = ref(false)
-    const route = useRoute()
     const data = ref()
-    const id = ref()
     const isSidebarActive = ref()
     const isNavbarActive = ref()
 
@@ -103,14 +100,6 @@ export default {
         name: "Single",
         path: "Single"
       },
-    })
-
-    onMounted(() => {
-      setTimeout(() => {
-        let routeID = route.params.id
-        id.value = routeID.match(/[a-zA-Z]+/gm)[0]
-        console.log(id.value)
-      }, 200)
     })
 
     const handleIsColored = () => {
@@ -151,7 +140,6 @@ export default {
       handleIsNonColored,
       isSidebarActive,
       isNavbarActive,
-      id
     }
   }
 }
@@ -172,7 +160,7 @@ export default {
   z-index: 1;
   bottom: 0;
   left: 0;
-  height: 100px;
+  height: 50px;
   right: 0;
   background: #666666;
   align-items: center;
@@ -186,13 +174,14 @@ export default {
   top: 0;
   right: 0;
   left: 0;
-  bottom: 100px;
+  bottom: 50px;
   z-index: 100;
   flex-direction: column;
   align-items: center;
   text-align:center;
   justify-content: center;
   .sidebarMenu{
+    overflow-y: scroll;
     .sidebars {
       margin: 10px;
     }
