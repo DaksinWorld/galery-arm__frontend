@@ -151,8 +151,7 @@ export default {
   min-width: 100px;
   width: 11.5vw;
   display: flex;
-  flex-direction:column
-
+  flex-direction:column;
 }
 
 .footerBar {

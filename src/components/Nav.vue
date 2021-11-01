@@ -36,7 +36,9 @@ name: "Nav"
 }
 
 nav {
-  padding-top: 5px;
+  background: #e7e7e7;
+  width: 100%;
+  padding: 5px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;

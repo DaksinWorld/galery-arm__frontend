@@ -7,18 +7,21 @@
         <router-view v-if="requests" :requests="requests"/>
       </div>
     </div>
+    <to-top/>
   </div>
 </template>
 <script>
 import Nav from '../components/Nav'
 import Sidebar from "@/components/Sidebar";
+import ToTop from "@/components/ToTop";
 import {useStore} from "vuex";
 import {computed, onMounted, ref} from "vue";
 
 export default {
   components: {
     Nav,
-    Sidebar
+    Sidebar,
+    ToTop
   },
   setup() {
     const store = useStore()
