@@ -1,7 +1,7 @@
 :root {
-  /*  --fontSize-h1: 25px;
-    --fontSize-h2: 0,889rem;
-    --fontSize-h3: 0,889rem;*/
+    --fontSize-h1: 1.802rem;
+    --fontSize-h2: 1.602rem;
+    --fontSize-h3: 1.424rem;*/
     --fontFamily: Montserrat;
     /*Meu*/
     /*CKEDITOR*/
@@ -109,11 +109,8 @@ h3, label {
 
 
 
-h3, label {
-    font-size: var(--fontSize-h3);
-}
-
 label {
+    font-size: var(--fontSize-h3);
     color: #666;
     display: block;
 }
