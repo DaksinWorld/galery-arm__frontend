@@ -18,7 +18,7 @@
       <div class="information" v-if="isActive">
         <!--Name-->
         <div class="h3">
-          <span class="image-text bold">{{ data[id - 1].name }} {{ data[id - 1].createdYear }}</span>
+          <span class="image-text bold">{{ data[id - 1].name }}  {{ data[id - 1].createdYear }}</span>
           <!--Is print available-->
           <span class="image-text" v-if="!data[id-1].isAvailable" style="font-weight: 500">SOLD OUT</span>
           <!--Edition-->
@@ -31,15 +31,16 @@
         </div>
         <div class="description-right"
         >
+          <button v-if="data[id-1].isAvailable" class="buy-print">
+          <a :href="data[id-1].url">Buy Print</a>
+        </button>
           <span class="image-text" v-if="data[id-1].isAvailable && data[id-1].tags">
             this work is part of the "
             <router-link :to="`/${data[id-1].tags}`" class="bold">{{ data[id - 1].tags }}</router-link>
             " series
           </span>
           <span class="image-text" v-if="data[id-1].description">{{ data[id - 1].description }}</span>
-          <button v-if="data[id-1].isAvailable" class="buy-print">
-            <a :href="data[id-1].url">Buy Print</a>
-          </button>
+
         </div>
       </div>
       <span class="image-text more" v-if="!isActive" @click="isActive = !isActive">Learn More</span>
