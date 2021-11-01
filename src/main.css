@@ -1,13 +1,13 @@
 :root {
-    --fontSize-h1: 25px;
+  /*  --fontSize-h1: 25px;
     --fontSize-h2: 0,889rem;
-    --fontSize-h3: 0,889rem;
+    --fontSize-h3: 0,889rem;*/
     --fontFamily: Montserrat;
     /*Meu*/
     /*CKEDITOR*/
     --fontFamilyEditor: "Libre Baskerville";
-    --fontWeightBold: 400;
-    --fontWeightNormal: 300;
+    --fontWeightBold: 500;
+    --fontWeightNormal: 400;
     --fontSize-Menu: 1em;
     --fontWeight-Menu-Normal: 300;
     --fontWeight-Menu-Active: 400;
@@ -19,17 +19,45 @@
     font-size: var(--fontSizeImage);
 }
 
+html {font-size: 100%;}
+
 body {
-    background: #e7e7e7;
+background: #f2f2f2;
+font-family: 'Libre Baskerville', serif;
+font-weight: 400;
+line-height: 1.75;
+color: #1b3b46;
 }
 
+/*
 * {
     font-family: "Libre Baskerville";
 }
+*/
+
+p {margin-bottom: 1rem;}
+
+h1, h2, h3, h4, h5 {
+  margin: 3rem 0 1.38rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 1.3;
+}
 
 h1 {
-    font-size: var(--fontSize-h1);
+  margin-top: 0;
+  font-size: 1.802rem;
 }
+
+h2 {font-size: 1.602rem;}
+
+h3 {font-size: 1.424rem;}
+
+h4 {font-size: 1.266rem;}
+
+h5 {font-size: 1.125rem;}
+
+small, .text_small {font-size: 0.889rem;}
 
 .container {
     width: 1730px;
@@ -67,22 +95,19 @@ form > button {
     background: #dae7f3;
     border: 0;
     padding: 10px;
-    font-size: var(--fontSize-h2);
+    font-size: 0.889rem;
     font-family: var(--fontFamily);
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     border-radius: 5px;
     color: #666;
 }
 
-h2, h3, label {
+h3, label {
     color: black;
     font-weight: var(--fontWeightNormal);
 }
 
-h2 {
-    font-size: var(--fontSize-h2);
-    color: #666;
-}
+
 
 h3, label {
     font-size: var(--fontSize-h3);
