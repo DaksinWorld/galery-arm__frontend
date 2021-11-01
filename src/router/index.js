@@ -97,6 +97,14 @@ const routes = [
             layout: 'void'
         }
     },
+    {
+        path: '/workshop-page/:id',
+        name: 'workshopPage',
+        component: () => import('../views/WorkshopPage'),
+        meta: {
+            layout: 'void'
+        }
+    },
 ]
 
 const router = createRouter({

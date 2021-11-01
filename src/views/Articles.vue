@@ -3,7 +3,7 @@
     <div class="article" v-for="(article,i) in requests" :key="i">
       <h2 class="name">{{article.name}}</h2>
       <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="image">
-      <div class="desc" v-html="article.description"></div>
+      <div class="desc" v-html="article.about"></div>
     </div>
   </div>
 </template>
@@ -63,6 +63,8 @@ export default {
       margin-right: 30px;
     }
 
+    margin-left: 15px;
+
     .name {
       grid-area: name;
       font-weight: 500;
@@ -72,6 +74,7 @@ export default {
       margin-top: 25px;
       grid-area: description;
       align-self: center;
+      overflow: hidden;
     }
   }
 }

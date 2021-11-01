@@ -37,11 +37,11 @@
           </span>
           <span class="image-text" v-if="requests[id-1].description">{{ requests[id - 1].description }}</span>
           <button v-if="requests[id-1].isAvailable" class="buy-print">
-            Buy Print
+            <a :href="requests[id-1].url">Buy Print</a>
           </button>
         </div>
       </div>
-      <span class="image-text more" v-if="!isActive" @click="isActive = !isActive">Подробнее</span>
+      <span class="image-text more" v-if="!isActive" @click="isActive = !isActive">Learn More</span>
     </div>
   </div>
 </template>
@@ -75,7 +75,7 @@ export default {
 
         let id2 = id.value - 1
 
-        if(window.innerWidth < 768 && requests.value[id2].image.width < 600) {
+        if(window.innerWidth < 768 && requests.value[id2].image.width < requests.value[id2].image.height) {
           isActive.value = false
           images.classList.add('moreInfo')
         } else {

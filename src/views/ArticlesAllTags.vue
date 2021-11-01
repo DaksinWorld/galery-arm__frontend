@@ -3,7 +3,7 @@
     <div class="article" v-for="(article,i) in articles" :key="i" @click="navigate(article._id)">
         <h2 class="name">{{article.name}}</h2>
         <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="">
-        <div class="desc" v-html="article.description">
+        <div class="desc" v-html="article.about">
         </div>
     </div>
   </div>
@@ -62,6 +62,8 @@ export default {
       margin-right: 30px;
     }
 
+    margin-left: 15px;
+
     .name {
       grid-area: name;
       font-weight: 500;
@@ -72,12 +74,9 @@ export default {
       margin-top: 25px;
       grid-area: description;
       align-self: center;
+      overflow: hidden;
     }
   }
-}
-
-* {
-  font-family: Montserrat;
 }
 
 @media screen and (max-width: 1400px ) {

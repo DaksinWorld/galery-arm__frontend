@@ -197,11 +197,13 @@
           ". info ."
           ". description ." !important;
     gap: 20px !important;
+    justify-items: left !important;
 
     .information {
       grid-template:"h3"
         "description"
       !important;
+      justify-items: left !important;
     }
 
     .m, .d {

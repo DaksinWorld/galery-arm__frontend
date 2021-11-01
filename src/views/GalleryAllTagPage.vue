@@ -36,11 +36,11 @@
           </span>
           <span class="image-text" v-if="data[id-1].description">{{ data[id - 1].description }}</span>
           <button v-if="data[id-1].isAvailable" class="buy-print">
-            Buy Print
+            <a :href="data[id-1].url">Buy Print</a>
           </button>
         </div>
       </div>
-      <span class="image-text more" v-if="!isActive" @click="isActive = !isActive">Подробнее</span>
+      <span class="image-text more" v-if="!isActive" @click="isActive = !isActive">Learn More</span>
     </div>
   </div>
 </template>
