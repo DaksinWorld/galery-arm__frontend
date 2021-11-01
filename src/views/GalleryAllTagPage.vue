@@ -18,9 +18,7 @@
       <div class="information" v-if="isActive">
         <!--Name-->
         <div class="h3">
-          <span class="image-text bold">{{ data[id - 1].name }}</span>
-          <!--Created Year-->
-          <span class="image-text">{{ data[id - 1].createdYear }}</span>
+          <span class="image-text bold">{{ data[id - 1].name }} {{ data[id - 1].createdYear }}</span>
           <!--Is print available-->
           <span class="image-text" v-if="!data[id-1].isAvailable" style="font-weight: 500">SOLD OUT</span>
           <!--Edition-->
@@ -64,9 +62,7 @@
       <div class="information" v-if="isActive">
         <!--Name-->
         <div class="h3">
-          <span class="image-text bold">{{ data[id - 1].name }}</span>
-          <!--Created Year-->
-          <span class="image-text">{{ data[id - 1].createdYear }}</span>
+          <span class="image-text bold">{{ data[id - 1].name }} {{ data[id - 1].createdYear }}</span>
           <!--Is print available-->
           <span class="image-text" v-if="!data[id-1].isAvailable" style="font-weight: 500">SOLD OUT</span>
           <!--Edition-->
