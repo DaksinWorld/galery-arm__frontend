@@ -36,7 +36,6 @@ name: "Nav"
 }
 
 nav {
-  background: #e7e7e7;
   width: 100%;
   padding: 5px;
   display: grid;
