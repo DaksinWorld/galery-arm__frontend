@@ -222,7 +222,7 @@ export default {
           "d mainPhoto m"
           ". info .";
     align-items: center;
-    justify-content: left;
+    justify-content: center;
 
     .description {
       display: none;
@@ -256,7 +256,7 @@ export default {
   .images {
     grid-template:
         "d mainPhoto m info";
-
+    justify-content: center;
     .description {
       display: none;
     }

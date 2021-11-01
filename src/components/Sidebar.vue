@@ -146,6 +146,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .sidebar {
   min-width: 100px;
   width: 11.5vw;
