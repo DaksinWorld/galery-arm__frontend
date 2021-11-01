@@ -1,8 +1,19 @@
+.buy-print {
+  background: #c7c7c7;
+  border-radius: 50px;
+  color: #666;
+  border: none;
+  padding: 13px 55px;
+  margin-top: 30px;
+  font-family: var(--fontFamilyEditor);
+  font-weight: 500;
+  font-size: 20px;
+}
 
-                   .h3 {
-                     display: flex;
-                     flex-direction: column;
-                   }
+.h3 {
+  display: flex;
+  flex-direction: column;
+}
 
 .description-right {
   display: flex;
@@ -34,11 +45,13 @@
 }
 
 .gallery-class-one-element {
-  .images {
+  .images, .images2 {
     display: grid;
     grid-template-areas:
           "d mainPhoto m"
-          ". info .";
+          ". info ."
+          ". desc ."
+          ". button .";
     align-items: center;
     justify-content: center;
 
@@ -47,12 +60,27 @@
       grid-area: desc;
     }
 
+    .buy-print {
+      grid-area: button;
+    }
+
+    .desc {
+      grid-area: desc;
+      display: flex;
+      justify-items: center;
+      flex-direction: column;
+      text-align: center;
+      span {
+        margin: 10px 0;
+      }
+    }
+
     .information {
       grid-area: info;
       display: grid;
       grid-template-areas:
           "h3 description";
-      gap: 50px;
+      gap: 100px;
       align-items: start;
       justify-content: center;
       justify-items: center;
@@ -79,6 +107,7 @@
     grid-template:
         "d mainPhoto m info";
     justify-content: center;
+
     .description {
       display: none;
     }
@@ -96,7 +125,7 @@
   width: 100%;
   flex-direction: column;
 
-  .images {
+  .images, .images2 {
     display: grid;
     align-items: center;
     justify-content: left;
@@ -116,18 +145,6 @@
 
       span:first-child {
         margin-top: 0;
-      }
-
-      .buy-print {
-        background: #c7c7c7;
-        border-radius: 50px;
-        color: #666;
-        border: none;
-        padding: 13px 55px;
-        margin-top: 30px;
-        font-family: var(--fontFamilyEditor);
-        font-weight: 500;
-        font-size: 20px;
       }
 
       .mt-100px {
@@ -190,7 +207,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .images {
+  .images{
     grid-template-areas:
           "d mainPhoto m"
           ". more ."
@@ -201,8 +218,7 @@
 
     .information {
       grid-template:"h3"
-        "description"
-      !important;
+        "description" !important;
       justify-items: left !important;
     }
 
@@ -213,6 +229,15 @@
 }
 
 @media screen and (max-width: 768px) {
+  .images2 {
+    gap: 0 !important;
+    .information {
+      gap: 10px !important;
+    }
+    .m, .d {
+      display: none;
+    }
+  }
   .images {
     grid-template-areas:
           "d mainPhoto m"
