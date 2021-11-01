@@ -5,13 +5,15 @@
       <img id="image" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${data[id-1].image.url}`"
            alt="image">
       <img v-if="data.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
-      <div v-if="isActive" class="description" >
+      <div v-if="isActive" class="description">
         <span class="image-text" v-if="data[id-1].isAvailable">
           this work is part of the "
           <bold style="font-weight: 500">{{ data[id - 1].tags }}</bold>
           " series
         </span>
-        <span class="image-text" style="margin-top: 30px" v-if="data[id-1].description">{{ data[id - 1].description }}</span>
+        <span class="image-text" style="margin-top: 30px" v-if="data[id-1].description">{{
+            data[id - 1].description
+          }}</span>
       </div>
       <div class="information" v-if="isActive">
         <!--Name-->
@@ -22,10 +24,11 @@
           <!--Is print available-->
           <span class="image-text" v-if="!data[id-1].isAvailable" style="font-weight: 500">SOLD OUT</span>
           <!--Edition-->
-          <span class="image-text" v-if="data[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
+          <span class="image-text" v-if="data[id-1].OpenOrLimited"><span
+              style="font-weight: 500">LIMITED EDITION OF</span>
             {{ data[id - 1].circulation }}AP</span>
           <span class="image-text" v-else style="font-weight: 500">OPEN EDITION</span>
-          <span class="image-text" style="font-weight: 500">EDITION {{data[id - 1].currentCirculation}}</span>
+          <span class="image-text" style="font-weight: 500">EDITION {{ data[id - 1].currentCirculation }}</span>
           <span class="image-text"><span class="bold font-6">SIZE</span> {{ data[id - 1].size }}</span>
         </div>
         <div class="description-right"
@@ -54,7 +57,9 @@
           <bold style="font-weight: 500">{{ data[id - 1].tags }}</bold>
           " series
         </span>
-        <span class="image-text" style="margin-top: 30px" v-if="data[id-1].description">{{ data[id - 1].description }}</span>
+        <span class="image-text" style="margin-top: 30px" v-if="data[id-1].description">{{
+            data[id - 1].description
+          }}</span>
       </div>
       <div class="information" v-if="isActive">
         <!--Name-->
@@ -65,26 +70,30 @@
           <!--Is print available-->
           <span class="image-text" v-if="!data[id-1].isAvailable" style="font-weight: 500">SOLD OUT</span>
           <!--Edition-->
-          <span class="image-text" v-if="data[id-1].OpenOrLimited"><span style="font-weight: 500">LIMITED EDITION OF</span>
-            {{ data[id - 1].circulation }}AP</span>
+          <span class="image-text" v-if="data[id-1].OpenOrLimited"><span
+              style="font-weight: 500">LIMITED EDITION OF</span>
+            {{ data[id - 1].circulation }}</span>
           <span class="image-text" v-else style="font-weight: 500">OPEN EDITION</span>
         </div>
         <div class="description-right" id="descriptionRight">
-          <span class="image-text" style="font-weight: 500">EDITION {{data[id - 1].currentCirculation}}</span>
+          <span class="image-text" style="font-weight: 500">EDITION {{ data[id - 1].currentCirculation }}</span>
           <span class="image-text"><span class="bold font-6">SIZE</span> {{ data[id - 1].size }}</span>
         </div>
       </div>
       <div class="desc">
+        <div class="allWidth">
+          <button v-if="data[id-1].isAvailable" class="buy-print2">
+            <a :href="data[id-1].url">Buy Print</a>
+          </button>
+        </div>
         <span class="image-text" v-if="data[id-1].isAvailable && data[id-1].tags">
             this work is part of the "
             <router-link :to="`/${data[id-1].tags}`" class="bold">{{ data[id - 1].tags }}</router-link>
             " series
-      </span>
+        </span>
         <span class="image-text" v-if="data[id-1].description">{{ data[id - 1].description }}</span>
       </div>
-      <button v-if="data[id-1].isAvailable" class="buy-print">
-        <a :href="data[id-1].url">Buy Print</a>
-      </button>
+
 
       <span class="image-text more" v-if="!isActive" @click="isActive = !isActive">Learn More</span>
     </div>
@@ -123,7 +132,7 @@ export default {
 
         let id2 = id.value - 1
 
-        if(window.innerWidth < 768 && data.value[id2].image.width < 600) {
+        if (window.innerWidth < 768 && data.value[id2].image.width < 600) {
           isActive.value = false
           images.classList.add('moreInfo')
         } else {

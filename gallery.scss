@@ -1,13 +1,27 @@
-.buy-print {
+.buy-print2 {
   background: #c7c7c7;
   border-radius: 50px;
   color: #666;
   border: none;
-  padding: 13px 55px;
-  margin-top: 30px;
+  padding: 30px;
+  margin-top: 5px;
+  margin-bottom: 30px;
   font-family: var(--fontFamilyEditor);
   font-weight: 500;
   font-size: 20px;
+  width: 30%;
+}
+
+@media screen and (max-width: 560px) {
+  .buy-print2 {
+    width: 100%;
+  }
+}
+
+.allWidth {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .h3 {
@@ -50,8 +64,7 @@
     grid-template-areas:
           "d mainPhoto m"
           ". info ."
-          ". desc ."
-          ". button .";
+          ". desc .";
     align-items: center;
     justify-content: center;
 
@@ -60,16 +73,14 @@
       grid-area: desc;
     }
 
-    .buy-print {
-      grid-area: button;
-    }
-
     .desc {
       grid-area: desc;
       display: flex;
       justify-items: center;
+      justify-content: center;
       flex-direction: column;
       text-align: center;
+
       span {
         margin: 10px 0;
       }
@@ -143,6 +154,18 @@
         color: black;
       }
 
+      .buy-print {
+        background: #c7c7c7;
+        border-radius: 50px;
+        color: #666;
+        border: none;
+        padding: 13px 55px;
+        margin-top: 30px;
+        font-family: var(--fontFamilyEditor);
+        font-weight: 500;
+        font-size: 20px;
+      }
+
       span:first-child {
         margin-top: 0;
       }
@@ -207,7 +230,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .images{
+  .images {
     grid-template-areas:
           "d mainPhoto m"
           ". more ."
@@ -231,9 +254,19 @@
 @media screen and (max-width: 768px) {
   .images2 {
     gap: 0 !important;
+
     .information {
       gap: 10px !important;
+      display: flex !important;
+      flex-direction: column;
+
+      .h3, .description-right {
+        .image-text:first-child {
+          margin-top: 30px;
+        }
+      }
     }
+
     .m, .d {
       display: none;
     }
