@@ -45,38 +45,41 @@ export default {
 
 .workshop {
   display: grid;
-  align-content: space-between;
+  align-content: center;
   grid-template-columns: 1fr 1fr;
-  padding-left: 6vw;
+  margin: 0 auto;
+  gap: 20px;
   .workshops {
     display: grid;
     grid-template-areas:
   'name name'
   'image description' ;
+    cursor: pointer;
+    align-items: center;
     img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       grid-area: image;
-      margin-top: 25px;
-      margin-right: 30px;
     }
 
     .name {
       grid-area: name;
       font-weight: 500;
+      cursor: pointer;
     }
 
     .desc {
-      margin-top: 25px;
       grid-area: description;
       align-self: center;
+      cursor: pointer;
+      margin-left: 15px;
     }
   }
 }
 
 @media screen and (max-width: 1400px ) {
-  .articles {
+  .workshop {
     grid-template-columns: auto;
   }
 }

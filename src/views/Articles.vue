@@ -1,7 +1,7 @@
 <template>
   <div class="articles container2" v-if="requests">
     <div class="article" v-for="(article,i) in requests" :key="i">
-      <h2 class="name">{{article.name}}</h2>
+      <h2 class="name">{{ article.name }}</h2>
       <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${article.image.url}`" alt="image">
       <div class="desc" v-html="article.about"></div>
     </div>
@@ -11,7 +11,7 @@
 <script>
 import {useRoute} from 'vue-router'
 import {useStore} from 'vuex'
-import { computed,ref, onMounted} from 'vue'
+import {computed, onMounted, ref} from 'vue'
 
 export default {
   setup() {
@@ -48,21 +48,23 @@ export default {
   display: grid;
   align-content: space-between;
   grid-template-columns: 1fr 1fr;
-  padding-left: 6vw;
+  margin: 0 auto;
+
   .article {
     display: grid;
-    grid-template-areas:
-  'name name'
-  'image description' ;
+    grid-template:
+    'name name'
+    'image description' / auto 1fr;
+
     img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       grid-area: image;
-      margin-top: 25px;
-      margin-right: 30px;
+
     }
 
+    cursor: pointer;
     margin-left: 15px;
 
     .name {
@@ -71,7 +73,7 @@ export default {
     }
 
     .desc {
-      margin-top: 25px;
+      margin-left: 15px;
       grid-area: description;
       align-self: center;
       overflow: hidden;
@@ -79,7 +81,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 1400px ) {
+@media screen and (max-width: 1400px) {
   .articles {
     grid-template-columns: auto;
   }

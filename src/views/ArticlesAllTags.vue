@@ -47,22 +47,22 @@ export default {
   display: grid;
   align-content: space-between;
   grid-template-columns: 1fr 1fr;
-  padding-left: 6vw;
+  margin: 0 auto;
   .article {
     display: grid;
-    grid-template-areas:
+    grid-template:
   'name name'
-  'image description' ;
+  'image description' / auto 1fr;
     img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       grid-area: image;
-      margin-top: 25px;
-      margin-right: 30px;
     }
 
     margin-left: 15px;
+
+    cursor: pointer;
 
     .name {
       grid-area: name;
@@ -71,7 +71,7 @@ export default {
     }
 
     .desc {
-      margin-top: 25px;
+      margin-left: 15px;
       grid-area: description;
       align-self: center;
       overflow: hidden;
