@@ -20,29 +20,3 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.layout {
-  margin: 50px 0;
-  display: flex;
-  flex-direction: row;
-}
-
-.footer-bar {
-  display: none;
-}
-
-@media screen and (max-width: 1110px) {
-  .layout {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-    display: none !important;
-  }
-  .footer-bar {
-    display: block;
-  }
-}
-</style>

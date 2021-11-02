@@ -1,7 +1,7 @@
 <template>
   <div v-if="data" class="container2">
     <h1 class="title">{{data.name}}</h1>
-    <img :src="`https://quiet-basin-40455.herokuapp.com${data.image.url}`" alt="image">
+    <img :src="`https://quiet-basin-40455.herokuapp.com${data.image.url}`" :width="data.image.width" :height="data.image.height" alt="image">
     <div v-html="data.description"></div>
   </div>
 </template>
@@ -30,15 +30,5 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  font-weight: 600;
-  font-family: var(--fontFamilyEditor);
-}
-
-.container2 {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+.title {font-weight: 600;font-family: var(--fontFamilyEditor);}.container2 {margin: 0 auto;display: flex;flex-direction: column;justify-content: center;}
 </style>

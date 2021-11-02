@@ -1,6 +1,6 @@
 <template>
   <div v-if="data" class="container2">
-    <div >
+    <div>
       <h1 class="title">{{data.name}}</h1>
       <img :src="`https://quiet-basin-40455.herokuapp.com${data.image.url}`" alt="image">
       <div v-html="data.description"></div>
@@ -32,17 +32,5 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  font-weight: 600;
-  font-family: var(--fontFamilyEditor);
-}
-
-.container2 {
-  width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-
-}
-
+.title{font-weight: 600;font-family: var(--fontFamilyEditor);}.container2 {display: flex;justify-content: center;}
 </style>

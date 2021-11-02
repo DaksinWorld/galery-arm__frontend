@@ -37,50 +37,7 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.container2 {
-  width: 1200px;
-}
-
-.workshop {
-  display: grid;
-  align-content: center;
-  grid-template-columns: 1fr 1fr;
-  margin: 0 auto;
-  gap: 20px;
-  .workshops {
-    display: grid;
-    grid-template-areas:
-  'name name'
-  'image description' ;
-    cursor: pointer;
-    align-items: center;
-    img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      grid-area: image;
-    }
-
-    .name {
-      grid-area: name;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .desc {
-      grid-area: description;
-      align-self: center;
-      cursor: pointer;
-      margin-left: 15px;
-    }
-  }
-}
-
-@media screen and (max-width: 1400px ) {
-  .workshop {
-    grid-template-columns: auto;
-  }
-}
+<style scoped lang="scss">
+@import "gallery";
 </style>
+

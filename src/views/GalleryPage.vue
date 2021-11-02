@@ -3,6 +3,7 @@
     <div class="images">
       <img :class="{none: id === 1}" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
       <img id="image" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${data[id-1].image.url}`"
+           :width="data[id-1].image.width" :height="data[id-1].image.height"
            alt="image">
       <img v-if="data.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
       <div v-if="isActive" class="description">
@@ -48,6 +49,7 @@
     <div class="images2">
       <img :class="{none: id === 1}" class="m" src="../assets/left.svg" alt="left" @click="navigateMinusOne">
       <img id="image2" class="mainPhoto" :src="`https://quiet-basin-40455.herokuapp.com${data[id-1].image.url}`"
+           :width="data[id-1].image.width" :height="data[id-1].image.height"
            alt="image">
       <img v-if="data.length !== id" class="m" src="../assets/right.svg" alt="right" @click="navigatePlusOne">
       <div v-if="isActive" class="description" id="descriptionDown">

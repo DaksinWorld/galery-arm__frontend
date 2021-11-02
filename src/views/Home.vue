@@ -2,14 +2,14 @@
   <div class="container gallery" v-if="data">
     <div class="flexbin flexbin-margin">
       <a v-for="(gallery) in data" :key="gallery.id">
-        <img class="el" v-lazy="{src: `https://quiet-basin-40455.herokuapp.com${gallery.image.url}`}" alt="image" @click="navigate(gallery.second_id,gallery.tags)" :requests="requests">
+        <img class="el" v-lazy="{src: `https://quiet-basin-40455.herokuapp.com${gallery.image.url}`}" :width="gallery.image.width" :height="gallery.image.height" alt="image" @click="navigate(gallery.second_id,gallery.tags)" :requests="requests">
       </a>
     </div>
   </div>
 </template>
 
 <script>
-import {computed, reactive} from "vue";
+import {computed} from "vue";
 import {useRoute} from "vue-router";
 import {useRouter} from "vue-router";
 
@@ -37,22 +37,7 @@ export default {
       },300)
     }
 
-    const lazyOptions = reactive({
-      lifecycle: {
-        loading: () => {
-          console.log('image loading')
-        },
-        error: () => {
-          console.log('image error')
-        },
-        loaded: () => {
-          console.log('image loaded')
-        }
-      }
-    })
-
     return{
-      lazyOptions,
       data,
       navigate
     }
@@ -70,17 +55,4 @@ export default {
   height: 400px !important;
   cursor: pointer;
 }
-
-.gallery {
-  display: flex;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 860px) {
-  .element, img {
-
-  }
-}
-
-
 </style>

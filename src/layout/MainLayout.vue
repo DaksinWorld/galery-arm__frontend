@@ -54,24 +54,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.layout {
-  margin: 50px 0;
-  display: flex;
-  flex-direction: row;
-}
-
-.footer {
-  display: none;
-}
-
-.sidebar {
-  display: block;
-}
-
-@media screen and (max-width: 1110px) {
-  .layout {
-    margin-top: 30px;
-  }
-}
-</style>

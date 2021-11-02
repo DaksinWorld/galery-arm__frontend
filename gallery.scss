@@ -12,6 +12,91 @@
   width: 30%;
 }
 
+.workshop {
+  display: grid;
+  align-content: center;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+  gap: 20px;
+  .workshops {
+    display: grid;
+    grid-template-areas:
+  'name name'
+  'image description' ;
+    cursor: pointer;
+    align-items: center;
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      grid-area: image;
+    }
+
+    .name {
+      grid-area: name;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .desc {
+      grid-area: description;
+      align-self: center;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+  }
+}
+
+
+.articles {
+  display: grid;
+  align-content: space-between;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+
+  .article {
+    display: grid;
+    grid-template:
+    'name name'
+    'image description' / auto 1fr;
+
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      grid-area: image;
+
+    }
+
+    cursor: pointer;
+    margin-left: 15px;
+
+    .name {
+      grid-area: name;
+      font-weight: 500;
+    }
+
+    .desc {
+      margin-left: 15px;
+      grid-area: description;
+      align-self: center;
+      overflow: hidden;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .articles {
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (max-width: 1400px ) {
+  .workshop {
+    grid-template-columns: auto;
+  }
+}
+
 @media screen and (max-width: 560px) {
   .buy-print2 {
     width: 100%;

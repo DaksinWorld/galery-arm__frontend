@@ -11,13 +11,6 @@ const routes = [
         }
     },
     {
-        path: '/',
-        component: () => import('../views/PushToAllPhoto'),
-        meta: {
-            layout: "void"
-        }
-    },
-    {
         path: '/:id',
         name: 'GalleryCatalog',
         component: Home,
