@@ -1,8 +1,10 @@
 <template>
-  <div v-if="data">
-    <h1 class="title">{{data.name}}</h1>
-    <img :src="`https://quiet-basin-40455.herokuapp.com${data.image.url}`" alt="image">
-    <div v-html="data.description"></div>
+  <div v-if="data" class="container2">
+    <div >
+      <h1 class="title">{{data.name}}</h1>
+      <img :src="`https://quiet-basin-40455.herokuapp.com${data.image.url}`" alt="image">
+      <div v-html="data.description"></div>
+    </div>
   </div>
 </template>
 
@@ -34,4 +36,13 @@ export default {
   font-weight: 600;
   font-family: var(--fontFamilyEditor);
 }
+
+.container2 {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 </style>
