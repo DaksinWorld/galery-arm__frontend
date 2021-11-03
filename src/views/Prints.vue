@@ -3,7 +3,7 @@
     <div class="flexbin flexbin-margin">
       <a v-for="(gallery, i) in data" :key="gallery.id">
         <router-link v-slot="{navigate}" custom :to="{name: 'GalleryAllTag', params: {id: i+1}}">
-          <img class="el" :src="`https://quiet-basin-40455.herokuapp.com${gallery.image.url}`" :width="gallery[id-1].image.width" :height="gallery[id-1].image.height" alt="image" @click="navigate" :requests="requests">
+          <img class="el" :src="`https://quiet-basin-40455.herokuapp.com${gallery.image.url}`" alt="image" @click="navigate" :requests="requests">
         </router-link>
       </a>
     </div>
