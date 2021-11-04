@@ -1,7 +1,6 @@
 <template>
   <div v-if="data" class="container2">
     <div>
-      <h1 class="title">{{data.name}}</h1>
       <div v-html="data.description"></div>
     </div>
   </div>
