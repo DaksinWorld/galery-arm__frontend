@@ -1,6 +1,6 @@
 <template>
-  <div v-if="workshop" class="workshop container2">
-    <div class="workshops" v-for="(w,i) in workshop" :key="i" @click="navigate(w._id)">
+  <div v-if="workshop" class="articles container2">
+    <div class="article" v-for="(w,i) in workshop" :key="i" @click="navigate(w._id)">
       <h2 class="name">{{w.name}}</h2>
       <img class="image" :src="`https://quiet-basin-40455.herokuapp.com${w.image.url}`" alt="">
       <div class="desc" v-html="w.about">
