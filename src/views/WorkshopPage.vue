@@ -2,7 +2,6 @@
   <div v-if="data" class="container2">
     <div>
       <h1 class="title">{{data.name}}</h1>
-      <img :src="`https://quiet-basin-40455.herokuapp.com${data.image.url}`" alt="image">
       <div v-html="data.description"></div>
     </div>
   </div>
