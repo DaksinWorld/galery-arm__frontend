@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 
 const routes = [
     {
-        path: '/i/allPhoto',
+        path: '/',
         name: 'Gallery',
         component: () => import('../views/GalleryAllTags'),
         meta: {

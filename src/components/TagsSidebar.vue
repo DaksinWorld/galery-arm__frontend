@@ -27,7 +27,7 @@
         <router-link to="/info/about">about</router-link>
       </h2>
       <h2>
-        <router-link to="/i/allPhoto">Gallery</router-link>
+        <router-link to="/">Gallery</router-link>
       </h2>
       <h2>
         <router-link to="/info/prints">PRINTS</router-link>

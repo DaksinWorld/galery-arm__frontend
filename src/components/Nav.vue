@@ -1,12 +1,12 @@
 <template>
     <nav>
-      <img @click="$router.push('/i/AllPhoto')" class="logo" src="../assets/logo.svg" alt="Logo">
+      <img @click="$router.push('/')" class="logo" src="../assets/logo.svg" alt="Logo">
       <div class="nav-text">
         <span class="nav-item">
           <router-link to="/info/about">about</router-link>
         </span>
         <span class="nav-item">
-          <router-link to="/i/allPhoto">Gallery</router-link>
+          <router-link to="/">Gallery</router-link>
         </span>
         <span class="nav-item">
           <router-link to="/info/prints">PRINTS</router-link>
