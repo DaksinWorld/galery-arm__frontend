@@ -8,11 +8,17 @@
     --fontFamilyEditor: "Libre Baskerville";
     --fontWeightBold: 500;
     --fontWeightNormal: 400;
+    /*NAVBAR MENU*/
     --fontSize-Menu: 1em;
     --fontWeight-Menu-Normal: 300;
-    --fontWeight-Menu-Active: 400;
-    --MenuGap: 1.25em;
+    --MenuGap: 1.55em;
     --fontSizeImage: 0.9rem;
+    /*Sidebar Menu*/
+    --fontSize-Sidebar: 1em;
+    --fontWeight-Sidebar-Normal: 300;
+    --SidebarGap: 0.8em;
+    /*Выделение в меню (левое меню и верхнее меню)*/
+    --fontWeight-Menu-Active: 400;
 }
 
 .container2 {

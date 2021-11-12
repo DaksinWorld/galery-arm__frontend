@@ -2,7 +2,7 @@
   <div class="container gallery" v-if="data">
     <div class="flexbin flexbin-margin">
       <a v-for="(gallery) in data" :key="gallery.id">
-        <img v-if="gallery.image.formats.medium" class="el" v-lazy="{src: `https://quiet-basin-40455.herokuapp.com/files/${gallery.image.formats.medium.name}`}" alt="image" @click="navigate(gallery.second_id,gallery.tags)" :requests="requests">
+        <img v-if="gallery.image.formats.medium" class="el" height="400" v-lazy="{src: `https://quiet-basin-40455.herokuapp.com/files/${gallery.image.formats.medium.name}`}" alt="image" @click="navigate(gallery.second_id,gallery.tags)" :requests="requests">
       </a>
     </div>
   </div>

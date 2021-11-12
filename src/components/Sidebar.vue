@@ -183,7 +183,7 @@ export default {
   .sidebarMenu{
     overflow-y: scroll;
     .sidebars {
-      margin: 10px;
+      margin: 50px;
     }
   }
 }
@@ -195,9 +195,11 @@ export default {
   flex-direction: column;
 
   a {
-    font-size: 1em !important;
+    font-size: var(--fontSize-Sidebar) !important;
+    font-weight: var(--fontWeight-Sidebar-Normal) !important;
     color: #666;
     line-height: 2em;
+    margin: var(--SidebarGap) 0 !important;
   }
 }
 
